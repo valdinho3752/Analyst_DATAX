@@ -1,0 +1,45 @@
+from a2a.server.agent_execution import AgentExecutor, RequestContext
+from a2a.server.events import EventQueue
+from a2a.utils import new_agent_text_message
+
+from agent import RagAgent
+
+class RagAgentExecutor(AgentExecutor):
+    """Test AgentProxy Implementation."""
+
+    def __init__(self):
+        self.rag_agent_wrapper = RagAgent()
+
+    # --8<-- [end:HelloWorldAgentExecutor_init]
+    # --8<-- [start:HelloWorldAgentExecutor_execute]
+    async def execute(
+        self,
+        context: RequestContext,
+        event_queue: EventQueue,
+    ) -> None:
+        # 1. Obtener el texto que el usuario envió desde el contexto de A2A
+        from a2a.utils import get_message_text
+        user_input = get_message_text(context.message) if context.message else ""
+        
+        # 2. Ejecutar el agente usando el Runner oficial, configurando también el MCPServerManager 
+        from agents.mcp import MCPServerManager
+        from agents import Runner
+        
+        async with MCPServerManager(self.rag_agent_wrapper.agent.mcp_servers, connect_timeout_seconds=None, cleanup_timeout_seconds=None) as manager:
+            result = await Runner.run(self.rag_agent_wrapper.agent, user_input)
+            
+            # 3. Extraer el resultado (que es de tipo existing_Output)
+            # Pydantic te permite convertirlo a JSON fácilmente
+            output_data = result.final_output.model_dump_json(indent=2)
+            
+            # 4. Enviar el JSON de respuesta de vuelta a A2A
+            await event_queue.enqueue_event(new_agent_text_message(output_data))
+    # --8<-- [end:HelloWorldAgentExecutor_execute]
+
+    # --8<-- [start:HelloWorldAgentExecutor_cancel]
+    async def cancel(
+        self, context: RequestContext, event_queue: EventQueue
+    ) -> None:
+        raise Exception('cancel not supported')
+
+    # --8<-- [end:HelloWorldAgentExecutor_cancel]
