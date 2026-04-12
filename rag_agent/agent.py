@@ -1,17 +1,17 @@
-from agents import Agent, Runner
-from agents.tool import FileSearchTool
-from agents.mcp import MCPServerStreamableHttp, MCPServerManager
+from agents import Agent
+# from agents.tool import FileSearchTool
+from agents.mcp import MCPServerStreamableHttp
 
 from dotenv import load_dotenv, find_dotenv
 from typing import Optional , List
 from pydantic import BaseModel
 load_dotenv(find_dotenv())
 
-VECTOR_STORE_ID = "vs_69d0b04d55208191af182b98a3fc3e00"  
+# VECTOR_STORE_ID = "vs_69d0b04d55208191af182b98a3fc3e00"  
 
-file_search_tool = FileSearchTool(
-    vector_store_ids=[VECTOR_STORE_ID]
-)
+# file_search_tool = FileSearchTool(
+#     vector_store_ids=[VECTOR_STORE_ID]
+# )
 
 qdrant_mcp_server = MCPServerStreamableHttp(
     params={

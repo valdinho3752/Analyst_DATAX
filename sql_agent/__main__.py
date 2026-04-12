@@ -15,7 +15,7 @@ from a2a.types import (
     AgentSkill,
 )
 
-from agent_executor import RagAgentExecutor
+from agent_executor import SqlAgentExecutor
 # from agent_executor import (
     # HelloWorldAgentExecutor,  # type: ignore[import-untyped]
 # )
@@ -36,7 +36,7 @@ class MissingAPIKeyError(Exception):
 
 @click.command()
 @click.option('--host', 'host', default='0.0.0.0', help='Host sobre el cual hacer bind.')
-@click.option('--port', 'port', default=10000, help='Puerto en el cual correr el servidor.')
+@click.option('--port', 'port', default=10001, help='Puerto en el cual correr el servidor.')
 def main(host, port):
     """Inicia el servidor del Rag Agent."""
     try:
@@ -45,34 +45,40 @@ def main(host, port):
         #     raise MissingAPIKeyError('La variable de entorno OPENAI_API_KEY no está configurada.')
 
         # --8<-- [start:AgentSkill]
-        datascout_skill = AgentSkill(
-            id='rag_agent_skill',
-            name='datascout',
-            description='Verifica que la consulta hecha por el usuario existe dentro de la base de datos',
-            tags=['Rag', 'datascout'],
+        structure_skill = AgentSkill(
+            id='structure_skill',
+            name='Structure Skill',
+            description='Analiza la estructura de la base de datos y genera consultas SQL para obtener datos',
+            tags=['structure'],
             # examples=['hi', 'hello world'],
         )
         # --8<-- [end:AgentSkill]
-
-        coherence_skill = AgentSkill(
-            id='coherence_skill',
-            name='Coherence Checker',
-            description='Verifica que la consulta hecha por el usuario es coherente',
-            tags=['Rag', 'coherence'],
+        exact_match_skill = AgentSkill(
+            id='exact_match_skill',
+            name='Exact Match Skill',
+            description='Verifica que la tablas, columnas y campos referenciados en la consulta existen dentro de la base de datos',
+            tags=['exact_match'],
+            # examples=['hi', 'hello world'],
+        )
+        sql_skill = AgentSkill(
+            id='sql_skill',
+            name='SQL Skill',
+            description='Genera consultas SQL para obtener datos de la base de datos',
+            tags=['SQL', 'sql_skill'],
             examples=['check coherence', 'verify query'],
         )
 
         # --8<-- [start:AgentCard]
         # This will be the public-facing agent card
         public_agent_card = AgentCard(
-            name='Rag Agent',
-            description='Verifica que la consulta hecha por el usuario es coherente y existe dentro de la base de datos',
+            name='SQL Agent',
+            description='Analiza la estructura de la base de datos y genera consultas SQL para obtener datos',
             url=f'http://localhost:{port}/',
             version='1.0.0',
             default_input_modes=['text'],
             default_output_modes=['text'],
             capabilities=AgentCapabilities(streaming=True, push_notifications=True),
-            skills=[datascout_skill, coherence_skill],  # Only the basic skill for the public card
+            skills=[structure_skill, exact_match_skill, sql_skill],  # Only the basic skill for the public card
             supports_authenticated_extended_card=False,
         )
         # --8<-- [end:AgentCard]
@@ -94,7 +100,7 @@ def main(host, port):
         # )
 
         request_handler = DefaultRequestHandler(
-            agent_executor=RagAgentExecutor(),
+            agent_executor=SqlAgentExecutor(),
             task_store=InMemoryTaskStore(),
         )
 
