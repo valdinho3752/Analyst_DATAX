@@ -1,0 +1,4 @@
+a2a-sdk[http-server]>=0.3.0
+uvicorn
+python-dotenv
+openai-agents

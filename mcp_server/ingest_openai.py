@@ -10,9 +10,9 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 # ================= CONFIGURACIÓN =================
 # Referencia al archivo de chunks en la otra carpeta
-INPUT_FILE = "../../MultiAgentAnalyst/chunks_demo2.json"
+INPUT_FILE = "../metadata/chunks_demo2.json"
 COLLECTION_NAME = "rag_metadata_demo_openia"
-QDRANT_URL = "http://localhost:6333"
+QDRANT_URL = "http://localhost:6337"
 
 MODEL_NAME = "text-embedding-3-small"
 VECTOR_NAME = "openai-embedding" 

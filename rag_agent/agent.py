@@ -15,7 +15,7 @@ load_dotenv(find_dotenv())
 
 qdrant_mcp_server = MCPServerStreamableHttp(
     params={
-        "url": "http://localhost:8080/mcp"
+        "url": "http://mcp_server_openai:8080/mcp"
     },
     tool_filter={"include": ["search_relevant_tables"]}
 )

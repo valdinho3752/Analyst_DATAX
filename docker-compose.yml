@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  rag_agent_openai:
+    build:
+      context: ./rag_agent
+      dockerfile: Dockerfile
+    container_name: rag_agent_openai
+    env_file: .env
+    ports:
+      - "10000:10000"
+    volumes:
+      - ./rag_agent:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      mcp_server_openai:
+        condition: service_healthy
+    command: [ "python", "__main__.py" ]
+
+  sql_agent_openai:
+    build:
+      context: ./sql_agent
+      dockerfile: Dockerfile
+    container_name: sql_agent_openai
+    env_file: .env
+    ports:
+      - "10001:10001"
+    volumes:
+      - ./sql_agent:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      mcp_server_openai:
+        condition: service_healthy
+    command: [ "python", "__main__.py" ]
+
+  host_agent_openai:
+    build:
+      context: ./host_agent
+      dockerfile: Dockerfile
+    container_name: host_agent_openai
+    env_file: .env
+    ports:
+      - "10002:10002"
+    volumes:
+      - ./host_agent:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - rag_agent_openai
+      - sql_agent_openai
+    command: [ "python", "__main__.py" ]
+
+  mcp_server_openai:
+    build:
+      context: ./mcp_server
+      dockerfile: Dockerfile
+    container_name: mcp_server_openai
+    env_file: .env
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: [ "CMD-SHELL", "python -c \"import socket;s=socket.socket();s.settimeout(2);s.connect(('localhost',8080));s.close()\"" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 2s
+    volumes:
+      - ./mcp_server:/app
+      - ./secrets/ragagent-secrets.json:/app/gcp-key.json:ro
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+      - PORT=8080
+      - QDRANT_URL=http://qdrant_openai:6333
+    depends_on:
+      qdrant_openai:
+        condition: service_started
+
+  db:
+    container_name: postgres_rag_openai
+    image: postgres:latest
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=${USER_DB:-user_rag}
+      - POSTGRES_PASSWORD=${PASS_DB:-pass_rag}
+      - POSTGRES_DB=${DATABASE_DB:-rag_db}
+      - PGPASSWORD=${PASS_DB:-pass_rag}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./DB:/docker-entrypoint-initdb.d
+    command: postgres -c max_wal_size=4GB
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${USER_DB:-user_rag} -d ${DATABASE_DB:-rag_db}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  qdrant_openai:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_openai
+    ports:
+      - 6337:6333
+      - 6338:6334
+    expose:
+      - 6337
+      - 6338
+      - 6339
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data:

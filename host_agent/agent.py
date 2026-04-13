@@ -45,9 +45,9 @@ class HostAgent:
 
     def __init__(self):
         # Configuración de la conexión al sub-agente RAG
-        rag_url = os.getenv("RAG_AGENT_URL", "http://localhost:10000")
+        rag_url = os.getenv("RAG_AGENT_URL", "http://rag_agent_openai:10000")
         self.rag_connection = RemoteAgentConnection(rag_url)
-        sql_url = os.getenv("SQL_AGENT_URL", "http://localhost:10001")
+        sql_url = os.getenv("SQL_AGENT_URL", "http://sql_agent_openai:10001")
         self.sql_connection = RemoteAgentConnection(sql_url)
         
         @function_tool
@@ -81,6 +81,6 @@ class HostAgent:
         self.agent = Agent(
             name="Host Agent",
             instructions=self.INSTRUCTIONS,
-            tools=[verificar_existencia_datos],
+            tools=[verificar_existencia_datos, generar_consultas_sql],
             model="gpt-4o"
         )
