@@ -4,7 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http import models
 
 # --- CARGAR TU JSON ---
-with open("./metadata/metadata_demo.json", "r", encoding="utf-8") as f:
+with open("./metadata_demo.json", "r", encoding="utf-8") as f:
     metadata_raw = json.load(f)
 
 # Lista para guardar los puntos listos para Qdrant
@@ -42,14 +42,11 @@ for nombre_tabla, data_tabla in metadata_raw.items():
     # 2. PROCESAR DIMENSIONES
     columnas_dim = data_tabla.get("Dimensiones", {})
     for col_nombre, col_data in columnas_dim.items():
-        # Aplanar la lista de miembros para el texto (solo los primeros 10)
-        miembros_ejemplo = ", ".join(map(str, col_data.get("Miembros", [])[:10]))
         
         texto_dim = (
             f"Columna Dimensión: {col_nombre}. "
             f"Pertenece a la Tabla: {nombre_tabla}. "
             f"Descripción: {col_data.get('Descripcion')}. "
-            f"Valores ejemplo: {miembros_ejemplo}. "
             f"Jerarquía: {col_data.get('Jerarquia')}."
         )
         
@@ -110,7 +107,7 @@ for nombre_tabla, data_tabla in metadata_raw.items():
 print(f"✅ Procesado completado. Se generaron {len(puntos_qdrant)} chunks.")
 
 # Guardar en JSON para su posterior vectorización
-OUTPUT_FILE = "chunks_demo3.json"
+OUTPUT_FILE = "./chunks_demo3.json"
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(puntos_qdrant, f, indent=4, ensure_ascii=False)
 

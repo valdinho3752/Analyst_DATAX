@@ -23,7 +23,7 @@ async def test_host():
         
         client = A2AClient(httpx_client, card, url=agent_url)
         
-        query = "Cual es el monto del activo disponible con el que cerro su gestión BISA seguros en los últimos 3 años?"
+        query = """cual es el monto que tiene disponible en bancos BISA seguros en las últimas 3 gestiones?"""
         logger.info(f"Sending query to Host: {query}")
         
         send_message_payload = {

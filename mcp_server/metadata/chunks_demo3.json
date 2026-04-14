@@ -174,7 +174,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Representa el año calendario en el que se realiza el reporte de cierre trimestral de la cartera crediticia.. Valores ejemplo: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Representa el año calendario en el que se realiza el reporte de cierre trimestral de la cartera crediticia.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -308,7 +308,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Estado Cartera. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Clasifica la situación jurídica y de cumplimiento del crédito, permitiendo distinguir entre cartera vigente, en mora, reprogramada o compromisos contingentes.. Valores ejemplo: Contingente, Ejecucion, Reprogramada o reestructurada ejecucion, Reprogramada o reestructurada vencida, Reprogramada o reestructurada vigente, Vencida, Vigente. Jerarquía: .",
+        "texto": "Columna Dimensión: Estado Cartera. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Clasifica la situación jurídica y de cumplimiento del crédito, permitiendo distinguir entre cartera vigente, en mora, reprogramada o compromisos contingentes.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Estado Cartera",
@@ -392,7 +392,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Agrupa a las instituciones financieras según su licencia de operación y modelo de negocio definido por la Ley de Servicios Financieros.. Valores ejemplo: Banco Múltiple, Banco PyME, EIF 2do. Piso, IFD. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Agrupa a las instituciones financieras según su licencia de operación y modelo de negocio definido por la Ley de Servicios Financieros.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Entidad",
@@ -446,7 +446,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Entidad. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Siglas oficiales que identifican de forma unívoca a cada entidad de intermediación financiera supervisada por ASFI.. Valores ejemplo: BCR, BDB, BDR, BEC, BFO, BFS, BGA, BIE, BIS, BME. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Entidad. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Siglas oficiales que identifican de forma unívoca a cada entidad de intermediación financiera supervisada por ASFI.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Entidad",
@@ -730,7 +730,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Trimestre. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Identificador del periodo de tres meses (I, II, III, IV) al cual corresponde el corte de los saldos de cartera.. Valores ejemplo: I, II, III, IV. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Trimestre. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Identificador del periodo de tres meses (I, II, III, IV) al cual corresponde el corte de los saldos de cartera.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Trimestre",
@@ -784,7 +784,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Crédito. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Segmentación detallada del préstamo basada en el destino del crédito, el tipo de garantía y el perfil del deudor (Microcrédito, Vivienda, PyME, etc.).. Valores ejemplo: Crédito debidamente Garantizado al Sector Público, Crédito de Consumo, Crédito de Consumo a traves de Medios Electronicos, Crédito de Consumo debidamente Garantizado, Crédito de Consumo Garantizado con Garantía Real, Crédito de Vivienda de Interés Social Sin Garantía Hipotecaria, Crédito de Vivienda Sin Garantía Hipotecaria, Crédito de Vivienda sin Garantía Hipotecaria debidamente Garantizado, Crédito Empresarial, Crédito Empresarial Agropecuario. Jerarquía: .",
+        "texto": "Columna Dimensión: Tipo Crédito. Pertenece a la Tabla: S_BOASFI66_000728. Descripción: Segmentación detallada del préstamo basada en el destino del crédito, el tipo de garantía y el perfil del deudor (Microcrédito, Vivienda, PyME, etc.).. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Crédito",
@@ -1680,7 +1680,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Identifica el año calendario al que corresponde el cálculo del saldo comercial.. Valores ejemplo: 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Identifica el año calendario al que corresponde el cálculo del saldo comercial.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -1954,7 +1954,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 1, 2, 3, 4, 5, 6, 7, 8. Jerarquía: .",
+        "texto": "Columna Dimensión: order Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Grandes Categ. GCE Rev.3",
@@ -2048,7 +2048,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Categ. Básica GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básica GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 11, 12, 21, 22, 31, 32, 41, 42, 51. Jerarquía: .",
+        "texto": "Columna Dimensión: order Categ. Básica GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básica GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Categ. Básica GCE Rev.3",
@@ -2232,7 +2232,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 111, 112, 121, 122, 211, 222, 311, 321, 322. Jerarquía: .",
+        "texto": "Columna Dimensión: order Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Subcateg. GCER Rev.3",
@@ -2406,7 +2406,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Categ. Básica GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Nivel intermedio de la clasificación GCE que agrupa los bienes según su uso económico general.. Valores ejemplo: ., Alimentos y Bebidas Básicos, Alimentos y Bebidas Elaborados, Artículos de Consumo Duraderos, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Bienes de Capital (excepto el equipo de transporte), Bienes no especificados en otra partida, Combustibles y Lubricantes Básicos, Combustibles y Lubricantes Elaborados. Jerarquía: .",
+        "texto": "Columna Dimensión: Categ. Básica GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Nivel intermedio de la clasificación GCE que agrupa los bienes según su uso económico general.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Categ. Básica GCE Rev.3",
@@ -2590,7 +2590,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Mes del año correspondiente al cálculo del balance entre exportaciones e importaciones.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Mes del año correspondiente al cálculo del balance entre exportaciones e importaciones.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -2724,7 +2724,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: País. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Socio comercial (país) con el cual se calcula el saldo comercial bilateral.. Valores ejemplo: Afganistan, Africa Española Del Norte, Albania, Alemania, Andorra, Angola, Anguilla, Antartida, Antigua Y Barbuda, Antillas Holandesas. Jerarquía: .",
+        "texto": "Columna Dimensión: País. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Socio comercial (país) con el cual se calcula el saldo comercial bilateral.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "País",
@@ -5298,7 +5298,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Código alfanumérico que identifica de manera única cada subcategoría económica dentro de la clasificación GCE Rev.3, permitiendo su uso como clave para análisis detallados y segmentación de datos comerciales.. Valores ejemplo: 111, 112, 121, 122, 21, 210, 220, 31, 310, 321. Jerarquía: .",
+        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Código alfanumérico que identifica de manera única cada subcategoría económica dentro de la clasificación GCE Rev.3, permitiendo su uso como clave para análisis detallados y segmentación de datos comerciales.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Código GCER Rev.3",
@@ -5562,7 +5562,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Clasificación superior de bienes (Capital, Consumo, Suministros, Combustibles) para el análisis del balance comercial.. Valores ejemplo: Alimentos y Bebidas, Artículos de consumo no especificados en otra partida, Bienes de Capital (excepto el equipo de transporte) y sus piezas y accesorios, Bienes no especificados en otra partida, Combustibles y Lubrincantes, Efectos Personales, Equipo de Transporte, sus piezas y accesorios, Suministros Industriales no especificados en otra partida. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Clasificación superior de bienes (Capital, Consumo, Suministros, Combustibles) para el análisis del balance comercial.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Grandes Categ. GCE Rev.3",
@@ -5656,7 +5656,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Nivel detallado de la clasificación GCE que especifica el destino industrial o doméstico de los bienes.. Valores ejemplo: ., Alimentos y Bebidas Básicas Destinados Principalmente a la Industria, Alimentos y Bebidas Básicos Destinados Principalmente al Consumo de los Hogares, Alimentos y Bebidas Elaborados Destinados Principalmente a la Industria, Alimentos y Bebidas Elaborados Destinados Principalmente al Consumo de los Hogares, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Combustibles y Lubricantes Básicos, Combustibles y Lubricantes Elaborados Gasolina, Efectos Personales. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000560. Descripción: Nivel detallado de la clasificación GCE que especifica el destino industrial o doméstico de los bienes.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Subcateg. GCER Rev.3",
@@ -6021,7 +6021,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Identifica el año calendario en el que se realiza el relevamiento diario de precios.. Valores ejemplo: 2021, 2020, 2023, 2022, 2017, 2025, 2019, 2026, 2018, 2024. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Identifica el año calendario en el que se realiza el relevamiento diario de precios.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -6135,7 +6135,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Nombre del mes correspondiente a la observación del precio, permitiendo análisis de estacionalidad mensual.. Valores ejemplo: Enero, Febrero, Julio, Marzo, Octubre, Junio, Septiembre, Abril, Noviembre, Agosto. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Nombre del mes correspondiente a la observación del precio, permitiendo análisis de estacionalidad mensual.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -6269,7 +6269,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Día. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Día específico del mes en el que se registra la cotización en los mercados.. Valores ejemplo: 12, 10, 06, 13, 03, 01, 15, 28, 19, 23. Jerarquía: J-1-3.",
+        "texto": "Columna Dimensión: Día. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Día específico del mes en el que se registra la cotización en los mercados.. Jerarquía: J-1-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Día",
@@ -6593,7 +6593,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mercado. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Identifica el centro de abastecimiento o mercado específico de la ciudad de Santa Cruz donde se tomó la muestra de precio.. Valores ejemplo: Plan 3000, No Definido, Mutualista, Abasto, Los Pozos, La Ramada. Jerarquía: .",
+        "texto": "Columna Dimensión: Mercado. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Identifica el centro de abastecimiento o mercado específico de la ciudad de Santa Cruz donde se tomó la muestra de precio.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mercado",
@@ -6667,7 +6667,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Precio Pollo. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Clasifica el tipo de precio según el eslabón de la cadena (Productor/Consumidor) y la forma de presentación del producto.. Valores ejemplo: Consumidor: P/ A Maquina C/Menudo, Consumidor: P/ A Mano C/Menudo, Productor: Precio De Pollo Vivo. Jerarquía: .",
+        "texto": "Columna Dimensión: Precio Pollo. Pertenece a la Tabla: S_BOADA_11_000730. Descripción: Clasifica el tipo de precio según el eslabón de la cadena (Productor/Consumidor) y la forma de presentación del producto.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Precio Pollo",
@@ -14015,7 +14015,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el año al que corresponde la data. Debe considerarse que la informaicón es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Mes\".. Valores ejemplo: 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el año al que corresponde la data. Debe considerarse que la informaicón es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Mes\".. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -14239,7 +14239,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Cuenta Financiera Nv2. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: orden Cuenta Financiera Nv2. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Cuenta Financiera Nv2",
@@ -14413,7 +14413,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Cuenta Financiera Nv3. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del tercer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-2-3.",
+        "texto": "Columna Dimensión: orden Cuenta Financiera Nv3. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del tercer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-2-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Cuenta Financiera Nv3",
@@ -14847,7 +14847,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Cuenta Financiera Nv4. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv4\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del cuarto nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-2-4.",
+        "texto": "Columna Dimensión: orden Cuenta Financiera Nv4. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv4\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del cuarto nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-2-4.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Cuenta Financiera Nv4",
@@ -16051,7 +16051,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Cuenta Financiera Nv5. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv5\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del quinto nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-2-5.",
+        "texto": "Columna Dimensión: orden Cuenta Financiera Nv5. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv5\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del quinto nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-2-5.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Cuenta Financiera Nv5",
@@ -16625,7 +16625,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Cuenta Financiera Nv1. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 1, 2, 3, 6, 7, 110114, 110115, 110214, 110215, 110314. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: orden Cuenta Financiera Nv1. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Financiera Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta Financiera del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Cuenta Financiera Nv1",
@@ -17249,7 +17249,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el mes correspondiente a cada registro de información financiera. Esta columna permite agrupar y analizar los datos financieros por periodos mensuales.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el mes correspondiente a cada registro de información financiera. Esta columna permite agrupar y analizar los datos financieros por periodos mensuales.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -17383,7 +17383,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Financiera Nv4. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Constituye el cuarto nivel de desagregación del plan de cuentas, enfocado en la especialización técnica y operativa de los registros financieros. A este nivel, el campo permite la diferenciación crítica por ramos de seguros —tales como seguros generales, de personas, fianzas o seguros obligatorios— y por la naturaleza específica de los activos y pasivos, facilitando la extracción de métricas de rendimiento por línea de negocio y el cumplimiento de los requerimientos de reporte detallado exigidos por el ente regulador.. Valores ejemplo: ., 1010101 Caja, 1010201 Bancos, 1010202 Entidades Financieras, 1020191 Seguros Generales, 1020192 Seguros de Fianzas, 1020193 Seguros de Personas, 1020194 Seguros Obligatorios, 1020195 Servicios de Pre-Pago, 1020196 Seguros Previsionales. Jerarquía: J-3-4.",
+        "texto": "Columna Dimensión: Cuenta Financiera Nv4. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Constituye el cuarto nivel de desagregación del plan de cuentas, enfocado en la especialización técnica y operativa de los registros financieros. A este nivel, el campo permite la diferenciación crítica por ramos de seguros —tales como seguros generales, de personas, fianzas o seguros obligatorios— y por la naturaleza específica de los activos y pasivos, facilitando la extracción de métricas de rendimiento por línea de negocio y el cumplimiento de los requerimientos de reporte detallado exigidos por el ente regulador.. Jerarquía: J-3-4.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Financiera Nv4",
@@ -58827,7 +58827,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Financiera Nv1. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa la categoría de mayor jerarquía dentro del Plan de Cuentas estandarizado por la Autoridad de Pensiones y Seguros (APS), funcionando como el eje principal de clasificación para la estructura del Balance General y el Estado de Resultados. Este campo permite una segregación macro de los hechos económicos, agrupando la información en grandes rubros patrimoniales y operativos que sirven como base para el análisis financiero consolidado de las entidades aseguradoras.. Valores ejemplo: 1 ACTIVO, 2 PASIVO, 3 PATRIMONIO, 401 PRODUCCION, 402 PRIMAS ACEPTADAS EN REASEGURO NACIONAL, 403 PRIMAS ACEPTADAS EN REASEGURO EXTRANJERO, 406 ANULACION PRIMAS CEDIDAS EN REASEGURO NACIONAL, 407 ANULACION PRIMAS CEDIDAS EN REASEGURO EXTRANJERO, 408 LIBERACION DE RESERVAS TECNICAS DE SEGUROS, 409 REINTEGRO COSTOS DE PRODUCCION. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Cuenta Financiera Nv1. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa la categoría de mayor jerarquía dentro del Plan de Cuentas estandarizado por la Autoridad de Pensiones y Seguros (APS), funcionando como el eje principal de clasificación para la estructura del Balance General y el Estado de Resultados. Este campo permite una segregación macro de los hechos económicos, agrupando la información en grandes rubros patrimoniales y operativos que sirven como base para el análisis financiero consolidado de las entidades aseguradoras.. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Financiera Nv1",
@@ -59451,7 +59451,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Aseguradora. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Identifica a la entidad legal o compañía de seguros que reporta la información financiera, funcionando como la dimensión principal de sujeto en el dataset. Este campo permite la distinción de datos entre los diversos actores del mercado asegurador boliviano —incluyendo aseguradoras de ramos generales, personas y salud— y es esencial para realizar análisis comparativos de participación de mercado, solvencia individual y desempeño financiero bajo la supervisión de la Autoridad de Pensiones y Seguros (APS).. Valores ejemplo: 24 de Septiembre, Adriática, Alianza EMA, Alianza Vida, BISA, BUPA, Credinform, Crediseguro, Crediseguro-G, FOIANINISALUD S.A.. Jerarquía: J-4-2.",
+        "texto": "Columna Dimensión: Aseguradora. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Identifica a la entidad legal o compañía de seguros que reporta la información financiera, funcionando como la dimensión principal de sujeto en el dataset. Este campo permite la distinción de datos entre los diversos actores del mercado asegurador boliviano —incluyendo aseguradoras de ramos generales, personas y salud— y es esencial para realizar análisis comparativos de participación de mercado, solvencia individual y desempeño financiero bajo la supervisión de la Autoridad de Pensiones y Seguros (APS).. Jerarquía: J-4-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Aseguradora",
@@ -59705,7 +59705,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Financiera Nv2. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Corresponde al segundo nivel de granularidad del catálogo contable oficial, diseñado para desglosar las categorías raíz en rubros operativos y financieros específicos. Este campo permite identificar la naturaleza técnica de los recursos y obligaciones —tales como inversiones, exigibilidades, reservas técnicas o capital—, facilitando un análisis dimensional intermedio que conecta la visión macro de los estados financieros con el detalle analítico de las operaciones de la aseguradora.. Valores ejemplo: ., 101 DISPONIBLE, 102 EXIGIBLE TECNICO, 103 EXIGIBLE ADMINISTRATIVO, 104 INVERSIONES, 105 BIENES DE USO, 106 BIENES RECIBIDOS EN PAGO, 107 TRANSITORIO, 108 DIFERIDO, 201 ADELANTOS FINANCIEROS. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Cuenta Financiera Nv2. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Corresponde al segundo nivel de granularidad del catálogo contable oficial, diseñado para desglosar las categorías raíz en rubros operativos y financieros específicos. Este campo permite identificar la naturaleza técnica de los recursos y obligaciones —tales como inversiones, exigibilidades, reservas técnicas o capital—, facilitando un análisis dimensional intermedio que conecta la visión macro de los estados financieros con el detalle analítico de las operaciones de la aseguradora.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Financiera Nv2",
@@ -61969,7 +61969,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Financiera Nv5. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el nivel de máxima desagregación analítica dentro del plan de cuentas oficial, permitiendo una identificación atómica de las operaciones financieras y técnicas. A este nivel, el campo desglosa la información en subcuentas específicas que detallan el comportamiento de ramos individuales de seguros —como incendio, automotores o riesgos técnicos— y la segmentación detallada de activos y pasivos. Es la unidad fundamental para el análisis de microdatos, la evaluación de siniestralidad por riesgo específico y el control exhaustivo de la composición patrimonial de la entidad aseguradora.. Valores ejemplo: ., 101010101 Caja, 101020101 Del país, 101020102 Del exterior, 101020201 Cooperativas, 101020202 Mutuales, 101020203 Sociedad Administradora Fondos de Inversión, 102019101 Incendio y aliados, 102019102 Robo, 102019103 Transportes. Jerarquía: J-3-5.",
+        "texto": "Columna Dimensión: Cuenta Financiera Nv5. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Representa el nivel de máxima desagregación analítica dentro del plan de cuentas oficial, permitiendo una identificación atómica de las operaciones financieras y técnicas. A este nivel, el campo desglosa la información en subcuentas específicas que detallan el comportamiento de ramos individuales de seguros —como incendio, automotores o riesgos técnicos— y la segmentación detallada de activos y pasivos. Es la unidad fundamental para el análisis de microdatos, la evaluación de siniestralidad por riesgo específico y el control exhaustivo de la composición patrimonial de la entidad aseguradora.. Jerarquía: J-3-5.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Financiera Nv5",
@@ -76503,7 +76503,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Financiera Nv3. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Define el tercer nivel de detalle en la jerarquía contable, permitiendo la identificación de cuentas específicas que integran los rubros operativos y financieros de la entidad. Este campo desglosa la naturaleza de los activos, pasivos y resultados en subcategorías analíticas —tales como tipos de disponibilidad, gestión de carteras de primas y relaciones contractuales con reaseguradores—, proporcionando la granularidad necesaria para la auditoría técnica y el seguimiento detallado de la solvencia operativa de la aseguradora.. Valores ejemplo: ., 10101 CAJA, 10102 BANCOS Y ENTIDADES FINANCIERAS, 10201 PRIMAS POR COBRAR, 10202 PRIMAS POR COBRAR DE COASEGURO ACEPTADO, 10205 PRIMAS POR COBRAR DE COASEGURO OTORGADO, 10206 COMPAÑIAS COASEGURADORAS COASEGURO ACEPTADO, 10207 DEUDORES - COMPAÑIAS COASEGURADORAS COASEGUROS OTORGADOS, 10208 REASEGURO ACEPTADO DE COMPAÑIAS NACIONALES, 10209 REASEGURO ACEPTADO DE COMPAÑIAS EXTRANJERAS. Jerarquía: J-3-3.",
+        "texto": "Columna Dimensión: Cuenta Financiera Nv3. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Define el tercer nivel de detalle en la jerarquía contable, permitiendo la identificación de cuentas específicas que integran los rubros operativos y financieros de la entidad. Este campo desglosa la naturaleza de los activos, pasivos y resultados en subcategorías analíticas —tales como tipos de disponibilidad, gestión de carteras de primas y relaciones contractuales con reaseguradores—, proporcionando la granularidad necesaria para la auditoría técnica y el seguimiento detallado de la solvencia operativa de la aseguradora.. Jerarquía: J-3-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Financiera Nv3",
@@ -84877,7 +84877,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Empresa de Seguros. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Define la clasificación jurídica y operativa de la entidad aseguradora basándose en la naturaleza de los riesgos que está autorizada a cubrir según la normativa de la APS. Este campo permite segmentar el mercado en categorías de especialización técnica —patrimoniales, de vida o salud—, facilitando la aplicación de métricas de solvencia y análisis de siniestralidad específicos para cada modelo de negocio dentro del sistema financiero asegurador.. Valores ejemplo: Generales y Fianzas, Personas, Seguros de Prepago de Salud. Jerarquía: J-4-1.",
+        "texto": "Columna Dimensión: Tipo Empresa de Seguros. Pertenece a la Tabla: S_BOAPS_44_000612. Descripción: Define la clasificación jurídica y operativa de la entidad aseguradora basándose en la naturaleza de los riesgos que está autorizada a cubrir según la normativa de la APS. Este campo permite segmentar el mercado en categorías de especialización técnica —patrimoniales, de vida o salud—, facilitando la aplicación de métricas de solvencia y análisis de siniestralidad específicos para cada modelo de negocio dentro del sistema financiero asegurador.. Jerarquía: J-4-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Empresa de Seguros",
@@ -85437,7 +85437,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Indicador Nv1. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría macro de indicadores, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Indicador Nv1. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría macro de indicadores, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Indicador Nv1",
@@ -85581,7 +85581,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Indicador Nv2. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada indicador específico, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 101, 102, 201, 202, 203, 204, 205, 301, 302, 303. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Indicador Nv2. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada indicador específico, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Indicador Nv2",
@@ -86665,7 +86665,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Año calendario correspondiente al cálculo mensual del indicador financiero.. Valores ejemplo: 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Año calendario correspondiente al cálculo mensual del indicador financiero.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -86889,7 +86889,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Siglas oficiales que identifican de forma unívoca a la entidad de intermediación financiera a la cual se le atribuye el indicador calculado.. Valores ejemplo: BCR, BCT, BDB, BDR, BEC, BFO, BFS, BGA, BIE, BIS. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Siglas oficiales que identifican de forma unívoca a la entidad de intermediación financiera a la cual se le atribuye el indicador calculado.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Entidad Financiera",
@@ -87723,7 +87723,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Indicador Nv2. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Nombre específico del indicador o ratio financiero calculado (ej: ROE, ROA, Coeficiente de Adecuación Patrimonial). Representa la fórmula o métrica técnica aplicada.. Valores ejemplo: A Cartera con Requerimiento de Previsión Conforme a 2, Activo Improductivo/Patrimonio, Activo Productivo/Activo+Contingente, Activo Productivo-Pasivo con Costo/Pasivo con Costo, Activos líquidos/depósitos corto plazo, Activos Liquidos/pasivos de corto plazo, Ajustes netos por inflación y por diferencia de cambio, Ajustes netos por inflación y por diferencias de cambio/Activo+Conting., Ajustes por inflación netos/Activo+Conting., B Cartera con Requerimiento de Previsión Conforme a 3. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Indicador Nv2. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Nombre específico del indicador o ratio financiero calculado (ej: ROE, ROA, Coeficiente de Adecuación Patrimonial). Representa la fórmula o métrica técnica aplicada.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Indicador Nv2",
@@ -88787,7 +88787,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Mes del año en el que se efectuó el corte y cálculo del indicador financiero.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: .",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Mes del año en el que se efectuó el corte y cálculo del indicador financiero.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -88921,7 +88921,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Clasificación de la entidad financiera según su rol en el sistema y licencia otorgada por ASFI.. Valores ejemplo: Banco, Banco Múltiple, Banco PyME, Cooperativa, EFV, EIF 2do. Piso, Fondo, IFD. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Clasificación de la entidad financiera según su rol en el sistema y licencia otorgada por ASFI.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Entidad",
@@ -89015,7 +89015,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Indicador Nv1. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Categoría macro que agrupa los indicadores según el área de análisis financiero (ej: Liquidez, Solvencia, Rentabilidad).. Valores ejemplo: CALIDAD DE CARTERA, ESTRUCTURA DE ACTIVOS, ESTRUCTURA DE GASTOS DE ADMINISTRACION, ESTRUCTURA DE PASIVOS, ESTRUCTURA FINANCIERA, ESTRUCTURA OBLIGACIONES CON EL PUBLICO, INGRESOS Y GASTOS FINANCIEROS, LIQUIDEZ, RATIOS DE EFICIENCIA, RENTABILIDAD. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Indicador Nv1. Pertenece a la Tabla: SPIM_50013_IF. Descripción: Categoría macro que agrupa los indicadores según el área de análisis financiero (ej: Liquidez, Solvencia, Rentabilidad).. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Indicador Nv1",
@@ -90462,7 +90462,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Representa el año calendario de la observación meteorológica, abarcando un registro histórico desde 1942.. Valores ejemplo: 1942, 1943, 1944, 1945, 1946, 1947, 1948, 1949, 1950, 1951. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Representa el año calendario de la observación meteorológica, abarcando un registro histórico desde 1942.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -91326,7 +91326,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Día. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Día del mes en el que se realizó la lectura de los instrumentos de la estación.. Valores ejemplo:  01,  02,  03,  04,  05,  06,  07,  08,  09,  10. Jerarquía: J-1-3.",
+        "texto": "Columna Dimensión: Día. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Día del mes en el que se realizó la lectura de los instrumentos de la estación.. Jerarquía: J-1-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Día",
@@ -91650,7 +91650,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Unidad territorial de primer nivel donde se encuentra instalada la estación de monitoreo.. Valores ejemplo: Beni, Chuquisaca, Cochabamba, La Paz, Oruro, Pando, Potosí, Santa Cruz, Tarija. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Unidad territorial de primer nivel donde se encuentra instalada la estación de monitoreo.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Departamento",
@@ -91754,7 +91754,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Provincia. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Jurisdicción provincial que permite la localización regional de los datos climáticos.. Valores ejemplo: Abaroa, Abel Iturralde, Alonso de Ibáñez, Andrés Ibáñez, Angel Sandoval, Antonio Quijarro, Arani, Arce, Aroma, Avilés. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Provincia. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Jurisdicción provincial que permite la localización regional de los datos climáticos.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Provincia",
@@ -92818,7 +92818,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Municipio. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Unidad municipal específica para el análisis de microclimas y condiciones locales.. Valores ejemplo: Acasio, Achacachi, Aiquile, Alalay, Alcalá, Antequera, Anzaldo, Apolo, Arani, Arbieto. Jerarquía: J-2-3.",
+        "texto": "Columna Dimensión: Municipio. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Unidad municipal específica para el análisis de microclimas y condiciones locales.. Jerarquía: J-2-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Municipio",
@@ -95222,7 +95222,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Parámetro Meteorológico. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Clasifica el tipo de medición térmica realizada, distinguiendo entre temperaturas máximas, mínimas o promedios diarios.. Valores ejemplo: Temperatura, Temperatura Máxima Diaria, Temperatura Media Diaria, Temperatura Mínima Diaria. Jerarquía: .",
+        "texto": "Columna Dimensión: Parámetro Meteorológico. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Clasifica el tipo de medición térmica realizada, distinguiendo entre temperaturas máximas, mínimas o promedios diarios.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Parámetro Meteorológico",
@@ -95276,7 +95276,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Nombre de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Nombre identificativo de la estación física que genera el dato. Incluye información sobre la tecnología de transmisión (GPRS/SAT).. Valores ejemplo: 4 Esquinas (GPRS), Abapo, Acasio, Acasio (GPRS), Achiri, Achumani - Franco Boliviano, Aguadas (GPRS), Aguadas Misicuni, Aiquile, Aiquile (GPRS). Jerarquía: J-3-3.",
+        "texto": "Columna Dimensión: Nombre de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Nombre identificativo de la estación física que genera el dato. Incluye información sobre la tecnología de transmisión (GPRS/SAT).. Jerarquía: J-3-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Nombre de Estación",
@@ -101410,7 +101410,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Propietario de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Entidad jurídica o gubernamental propietaria de los activos de la estación.. Valores ejemplo: ., CARE - Municipio de Batallas, Constructora el Ceibo, Cooperativa San Juan de Yapacani, COOPI - Municipio, CTB - Municipio, EMAGUA, EVAs - Municipio, FAO, FAO - Municipio. Jerarquía: .",
+        "texto": "Columna Dimensión: Propietario de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Entidad jurídica o gubernamental propietaria de los activos de la estación.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Propietario de Estación",
@@ -101754,7 +101754,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Operador de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Entidad responsable del mantenimiento técnico y la recolección de datos de la estación.. Valores ejemplo: ., CARE - Municipio de Batallas, Constructora el Ceibo, Cooperativa San Juan de Yapacani, EVAs - Municipio, FAB, FAO, FAO - Municipio, FiBL: Instituto de Investigaciones para la Agricultura, GAMC. Jerarquía: .",
+        "texto": "Columna Dimensión: Operador de Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Entidad responsable del mantenimiento técnico y la recolección de datos de la estación.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Operador de Estación",
@@ -102038,7 +102038,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Diferencia la finalidad principal de la estación, ya sea para el estudio del ciclo del agua o variables atmosféricas.. Valores ejemplo: Hidrológica, Meteorológica, n.d.. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Tipo Estación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Diferencia la finalidad principal de la estación, ya sea para el estudio del ciclo del agua o variables atmosféricas.. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Estación",
@@ -102082,7 +102082,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Sub TipoEstación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Indica el método de captura y transmisión de datos de la estación.. Valores ejemplo: Automática, Automática telemétrica GPRS, Convencional, Satelital. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Sub TipoEstación. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Indica el método de captura y transmisión de datos de la estación.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Sub TipoEstación",
@@ -102136,7 +102136,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Mes del año correspondiente a la toma de datos térmicos.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSNMH14_000515. Descripción: Mes del año correspondiente a la toma de datos térmicos.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -102811,7 +102811,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica para las reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 8, 7, 1, 5, 4, 2, 6, 3. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica para las reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Grandes Categ. GCE Rev.3",
@@ -102905,7 +102905,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básicas GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE aplicada a reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 11, 61, 81, 42, 31, 71, 21, 51, 41, 52. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básicas GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE aplicada a reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Categ. Básicas GCE Rev.3",
@@ -103079,7 +103079,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica específica dentro de las reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 311, 411, 351, 401, 352, 371, 121, 122, 321, 211. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica específica dentro de las reexportaciones, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Subcateg. GCER Rev.3",
@@ -103293,7 +103293,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Año calendario en el que se efectuó el trámite de reexportación de la mercancía.. Valores ejemplo: 2017, 2016, 2012, 2018, 2009, 2005, 2024, 2013, 2021, 2003. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Año calendario en el que se efectuó el trámite de reexportación de la mercancía.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -103567,7 +103567,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Nivel de desagregación detallado que especifica el uso económico de los bienes reexportados (ej. Alimentos elaborados para industria o consumo).. Valores ejemplo: Alimentos y Bebidas Elaborados Destinados Principalmente al Consumo de los Hogares, Efectos Personales, Artículos de Consumo Semiduraderos, Artículos de Consumo Duraderos, Otros Vehículos de Uso Industrial, Otros Vehículos de Uso No Industrial, Artículos de Consumo No Duraderos, Alimentos y Bebidas Básicos Destinados Principalmente al Consumo de los Hogares, Otros Combustibles y Lubricantes Elaborados, Alimentos y Bebidas Básicas Destinados Principalmente a la Industria. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Nivel de desagregación detallado que especifica el uso económico de los bienes reexportados (ej. Alimentos elaborados para industria o consumo).. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Subcateg. GCER Rev.3",
@@ -103781,7 +103781,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Categoría económica de nivel medio que agrupa los productos reexportados según su naturaleza básica.. Valores ejemplo: Vehículos automotores de pasajeros, Bienes no especificados en otra partida, Efectos Personales, Artículos de Consumo Semiduraderos, Alimentos y Bebidas Básicos, Artículos de Consumo Duraderos, Otros Vehículos, Combustibles y Lubricantes Elaborados, Piezas y Accesorios de Equipo de transporte, Artículos de Consumo No Duraderos. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Categoría económica de nivel medio que agrupa los productos reexportados según su naturaleza básica.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Categ. Básicas GCE Rev.3",
@@ -103955,7 +103955,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Mes del año en el que se registró la salida de la mercancía reexportada.. Valores ejemplo: Enero, Julio, Febrero, Marzo, Junio, Octubre, Septiembre, Abril, Noviembre, Agosto. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Mes del año en el que se registró la salida de la mercancía reexportada.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -104089,7 +104089,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Identifica el modo físico utilizado para el transporte de la mercancía reexportada fuera de las fronteras bolivianas.. Valores ejemplo: Carretero, Fluvial, Maritimo-Carretero, Ferroviario, Aéreo. Jerarquía: .",
+        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Identifica el modo físico utilizado para el transporte de la mercancía reexportada fuera de las fronteras bolivianas.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Medio de Transporte",
@@ -104153,7 +104153,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Vía de Salida. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Puerto, aeropuerto o punto fronterizo por donde salió legalmente la mercancía del territorio nacional.. Valores ejemplo: La Quiaca-Villazón, Charaña-Arica, Apacheta-Antofagasta, Boyuibe-Fortin Villazón, Zonas Francas, Arica-Charaña-Tambo Quemado, Iquique-Pisiga-Bella Vista, Amazonas-Cobija-Guayaramerín, Pocitos-Yacuiba, Desaguadero. Jerarquía: .",
+        "texto": "Columna Dimensión: Vía de Salida. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Puerto, aeropuerto o punto fronterizo por donde salió legalmente la mercancía del territorio nacional.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Vía de Salida",
@@ -104327,7 +104327,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: País Destino. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: País receptor final de la mercancía que está siendo reexportada desde Bolivia.. Valores ejemplo: Bangladesh, Indonesia, Venezuela, Brunei Darussalam, Libano, Afganistan, Singapur, Filipinas, Serbia Y Montenegro, Curazao. Jerarquía: .",
+        "texto": "Columna Dimensión: País Destino. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: País receptor final de la mercancía que está siendo reexportada desde Bolivia.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "País Destino",
@@ -106221,7 +106221,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Departamento de origen de la mercancía dentro de Bolivia al momento de tramitar su reexportación.. Valores ejemplo: Tarija, Cochabamba, Santa Cruz, Beni, Oruro, Chuquisaca, Potosí, Pando, La Paz. Jerarquía: .",
+        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Departamento de origen de la mercancía dentro de Bolivia al momento de tramitar su reexportación.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Departamento",
@@ -106325,7 +106325,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Identificador numérico estandarizado de la categoría económica según la clasificación GCE.. Valores ejemplo: 521, 121, 700, 322, 610, 122, 321, 530, 420, 630. Jerarquía: .",
+        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Identificador numérico estandarizado de la categoría económica según la clasificación GCE.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Código GCER Rev.3",
@@ -106539,7 +106539,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Nivel superior de clasificación que agrupa los bienes reexportados según su función macroeconómica general.. Valores ejemplo: Bienes no especificados en otra partida, Efectos Personales, Bienes de Capital (excepto el equipo de transporte) y sus piezas y accesorios, Suministros Industriales no especificados en otra partida, Combustibles y Lubrincantes, Alimentos y Bebidas, Equipo de Transporte, sus piezas y accesorios, Artículos de consumo no especificados en otra partida. Jerarquía: .",
+        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000566. Descripción: Nivel superior de clasificación que agrupa los bienes reexportados según su función macroeconómica general.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Grandes Categ. GCE Rev.3",
@@ -107905,7 +107905,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Cuenta Nv1. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 1, 2, 3, 5, 6, 7, 8, 9, 10, 11. Jerarquía: J-4-1.",
+        "texto": "Columna Dimensión: order Cuenta Nv1. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-4-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Cuenta Nv1",
@@ -108239,7 +108239,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Cuenta Nv2. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-4-2.",
+        "texto": "Columna Dimensión: order Cuenta Nv2. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-4-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Cuenta Nv2",
@@ -108373,7 +108373,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Cuenta Nv3. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del tercer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Jerarquía: J-4-3.",
+        "texto": "Columna Dimensión: order Cuenta Nv3. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Cuenta Nv3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada cuenta contable del tercer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: J-4-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Cuenta Nv3",
@@ -109027,7 +109027,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el año al que corresponde la data. Debe considerarse que la informaicón es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Mes\".. Valores ejemplo: 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el año al que corresponde la data. Debe considerarse que la informaicón es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Mes\".. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -109281,7 +109281,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las entidades financieras, expresadas mediante su sigla oficial.. Valores ejemplo: BCR, BCT, BDB, BDR, BEC, BFO, BFS, BGA, BIE, BIS. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las entidades financieras, expresadas mediante su sigla oficial.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Entidad Financiera",
@@ -110155,7 +110155,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el mes al que corresponde la data. Debe considerarse que la información es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Año\".. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el mes al que corresponde la data. Debe considerarse que la información es mensual y no agregable de forma transversal en el tiempo, por lo cual cuando se filtre la data por segmentos temporales, siempre deberá considerarse emplear de forma conjunta la dimensión \"Año\".. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -110289,7 +110289,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Nv3. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de tercer nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia (estas cuentas representan el desgloce más detallado de la cuenta de segundo nivel). Valores ejemplo: ., 111.00 CAJA, 112.00 BANCO CENTRAL DE BOLIVIA, 113.00 BANCOS Y CORRESPONSALES DEL PAÍS, 114.00 OFICINA MATRIZ Y SUCURSALES, 115.00 BANCOS Y CORRESPONSALES DEL EXTERIOR, 117.00 DOCUMENTOS DE COBRO INMEDIATO Y OTRAS OPERACIONES PENDIENTES DE LIQUIDACIÓN, 118.00 PRODUCTOS DEVENGADOS POR COBRAR DISPONIBILIDADES, 119.00 PREVISIÓN PARA DISPONIBILIDADES, 121.00 INVERSIONES EN EL BANCO CENTRAL DE BOLIVIA. Jerarquía: J-1-3.",
+        "texto": "Columna Dimensión: Cuenta Nv3. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de tercer nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia (estas cuentas representan el desgloce más detallado de la cuenta de segundo nivel). Jerarquía: J-1-3.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Nv3",
@@ -117173,7 +117173,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Nv1. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de primer nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia. Representan la agregación de las cuentsa de segundo nivel.. Valores ejemplo: 100.00 ACTIVO, 200.00 PASIVO, 300.00 PATRIMONIO, 410.00 GASTOS FINANCIEROS, 420.00 CARGOS POR DIFERENCIA DE CAMBIO Y MANTENIMIENTO DE VALOR, 430.00 CARGOS POR INCOB.Y DESVALORIZACION DE ACTIVOS FINANCIEROS, 440.00 OTROS GASTOS OPERATIVOS, 450.00 GASTOS DE ADMINISTRACION, 460.00 IMPUESTO SOBRE LAS UTILIDADES DE LAS EMPRESAS, 470.00 GASTOS EXTRAORDINARIOS. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Cuenta Nv1. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de primer nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia. Representan la agregación de las cuentsa de segundo nivel.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Nv1",
@@ -117507,7 +117507,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Entidad Financiera. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el tipo de entidad financiera sectorial a la que pertenece una determinada entidad.. Valores ejemplo: Banco, Banco Múltiple, Banco PyME, Cooperativa, EFV, EIF 2do. Piso, Fondo, IFD, Mutual. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Tipo Entidad Financiera. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Representa el tipo de entidad financiera sectorial a la que pertenece una determinada entidad.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Entidad Financiera",
@@ -117611,7 +117611,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Cuenta Nv2. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de segundo nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia (estas cuentas representan el desgloce más detallado de la cuenta de primer nivel y a su vez representa la agregación de las cuentas de tercer nivel). Valores ejemplo: ., 110.00 DISPONIBILIDADES, 120.00 INVERSIONES TEMPORARIAS, 130.00 CARTERA, 140.00 OTRAS CUENTAS POR COBRAR, 150.00 BIENES REALIZABLES, 160.00 INVERSIONES PERMANENTES, 170.00 BIENES DE USO, 180.00 OTROS ACTIVOS, 190.00 FIDEICOMISOS CONSTITUIDOS. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Cuenta Nv2. Pertenece a la Tabla: S_BOSBEF44_000392. Descripción: Contiene las cuentas contables de segundo nivel del balance y el estado de resultados de las entidades de intermediación financiera existentes en Bolivia (estas cuentas representan el desgloce más detallado de la cuenta de primer nivel y a su vez representa la agregación de las cuentas de tercer nivel). Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Cuenta Nv2",
@@ -119601,7 +119601,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Representa el año calendario en el que se nacionalizó la mercancía importada.. Valores ejemplo: 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Representa el año calendario en el que se nacionalizó la mercancía importada.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -119875,7 +119875,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Modo de transporte utilizado para el traslado de la mercancía desde el origen hasta la aduana boliviana.. Valores ejemplo: Aéreo, Carretero, Courrier, Ductos, Ferroviario, Fluvial, Lacustre, Otros, Postal. Jerarquía: .",
+        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Modo de transporte utilizado para el traslado de la mercancía desde el origen hasta la aduana boliviana.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Medio de Transporte",
@@ -119979,7 +119979,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Vía de Ingreso. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Punto de entrada o ruta fronteriza por la cual ingresó físicamente la mercancía al país.. Valores ejemplo: Aérea, Amazonas-Cobija-Guayaramerín, Antofagasta-Ollague-Uyuni, Arica-Charaña-Tambo Quemado, Corumbá-Puerto Suárez, Desaguadero, Desconocida, Iquique-Pisiga-Bella Vista, La Quiaca-Villazón, Moho-Puerto Acosta. Jerarquía: .",
+        "texto": "Columna Dimensión: Vía de Ingreso. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Punto de entrada o ruta fronteriza por la cual ingresó físicamente la mercancía al país.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Vía de Ingreso",
@@ -120153,7 +120153,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Aduana de Ingreso. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Recinto aduanero específico bajo la jurisdicción de la Aduana Nacional donde se realizó el trámite de importación.. Valores ejemplo: ACI Villazon, Aduana Aeropuerto Cochabamba, Aduana Aeropuerto El Alto, Aduana Aeropuerto Viru Viru, Aduana De Frontera De Villazon, Aduana De Frontera Pisiga, Aduana De Frontera Tambo Quemado, Aduana De Frontera Yacuiba, Aduana Frontera Apacheta, Aduana Frontera Arroyo Concepcion. Jerarquía: .",
+        "texto": "Columna Dimensión: Aduana de Ingreso. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Recinto aduanero específico bajo la jurisdicción de la Aduana Nacional donde se realizó el trámite de importación.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Aduana de Ingreso",
@@ -120887,7 +120887,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Mes del año correspondiente al registro estadístico de la importación.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Mes del año correspondiente al registro estadístico de la importación.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -121021,7 +121021,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Departamento de destino final declarado para la mercancía dentro de Bolivia.. Valores ejemplo: Beni, Chuquisaca, Cochabamba, La Paz, No Especificado, Oruro, Pando, Potosí, Santa Cruz, Tarija. Jerarquía: .",
+        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Departamento de destino final declarado para la mercancía dentro de Bolivia.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Departamento",
@@ -121135,7 +121135,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: País. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: País de origen o procedencia de la mercancía importada.. Valores ejemplo: Afganistan, Africa Española Del Norte, Aland Islas, Albania, Alemania, Andorra, Angola, Anguila, Anguilla, Antartida. Jerarquía: .",
+        "texto": "Columna Dimensión: País. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: País de origen o procedencia de la mercancía importada.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "País",
@@ -123729,7 +123729,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Grandes Categorías GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Clasificación macroeconómica superior de los bienes (Bienes de Capital, Consumo, Insumos).. Valores ejemplo: Alimentos y Bebidas, Artículos de consumo no especificados en otra partida, Bienes de Capital (excepto el equipo de transporte) y sus piezas y accesorios, Bienes no especificados en otra partida, Combustibles y Lubrincantes, Efectos Personales, Equipo de Transporte, sus piezas y accesorios, Suministros Industriales no especificados en otra partida. Jerarquía: .",
+        "texto": "Columna Dimensión: Grandes Categorías GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Clasificación macroeconómica superior de los bienes (Bienes de Capital, Consumo, Insumos).. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Grandes Categorías GCE Rev.3",
@@ -123823,7 +123823,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Categorías Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Agrupación intermedia de productos según su naturaleza y uso económico.. Valores ejemplo: ., Alimentos y Bebidas Básicos, Alimentos y Bebidas Elaborados, Artículos de Consumo Duraderos, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Bienes de Capital (excepto el equipo de transporte), Bienes no especificados en otra partida, Combustibles y Lubricantes Básicos, Combustibles y Lubricantes Elaborados. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Categorías Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Agrupación intermedia de productos según su naturaleza y uso económico.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Categorías Básicas GCE Rev.3",
@@ -124007,7 +124007,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Subcategorías GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Nivel de mayor detalle en la clasificación GCE, definiendo el sector de destino de la importación.. Valores ejemplo: ., Alimentos y Bebidas Básicas Destinados Principalmente a la Industria, Alimentos y Bebidas Básicos Destinados Principalmente al Consumo de los Hogares, Alimentos y Bebidas Elaborados Destinados Principalmente a la Industria, Alimentos y Bebidas Elaborados Destinados Principalmente al Consumo de los Hogares, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Combustibles y Lubricantes Básicos, Combustibles y Lubricantes Elaborados Gasolina, Efectos Personales. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Subcategorías GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Nivel de mayor detalle en la clasificación GCE, definiendo el sector de destino de la importación.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Subcategorías GCER Rev.3",
@@ -124181,7 +124181,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Código numérico estandarizado de la clasificación internacional de Grandes Categorías Económicas.. Valores ejemplo: 111, 112, 121, 122, 21, 210, 220, 31, 310, 321. Jerarquía: .",
+        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000596. Descripción: Código numérico estandarizado de la clasificación internacional de Grandes Categorías Económicas.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Código GCER Rev.3",
@@ -125028,7 +125028,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 1, 2, 3, 4, 5, 6, 7. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grandes Categ. GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada gran categoría económica, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Grandes Categ. GCE Rev.3",
@@ -125112,7 +125112,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básicas GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 11, 12, 21, 22, 31, 32, 41, 42, 51, 52. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Categ. Básicas GCE Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría básica de la clasificación GCE, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Categ. Básicas GCE Rev.3",
@@ -125276,7 +125276,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica detallada, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 111, 112, 121, 122, 211, 222, 311, 321, 322, 331. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Subcateg. GCER Rev.3\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subcategoría económica detallada, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Subcateg. GCER Rev.3",
@@ -125480,7 +125480,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identifica el año calendario en el que se realizó la operación de exportación.. Valores ejemplo: 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identifica el año calendario en el que se realizó la operación de exportación.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -125754,7 +125754,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Nivel de máxima desagregación de la Clasificación de Grandes Categorías Económicas, detallando el uso final específico de la mercancía exportada.. Valores ejemplo: Alimentos y Bebidas Básicas Destinados Principalmente a la Industria, Alimentos y Bebidas Básicos Destinados Principalmente al Consumo de los Hogares, Alimentos y Bebidas Elaborados Destinados Principalmente a la Industria, Alimentos y Bebidas Elaborados Destinados Principalmente al Consumo de los Hogares, Artículos de Consumo Duraderos, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Bienes de Capital (Excepto el Equipo de Transporte), Bienes No Especificados en Otra Partida, Combustibles y Lubricantes Básicos. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Subcateg. GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Nivel de máxima desagregación de la Clasificación de Grandes Categorías Económicas, detallando el uso final específico de la mercancía exportada.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Subcateg. GCER Rev.3",
@@ -125958,7 +125958,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Clasificación intermedia que agrupa los bienes exportados según categorías básicas de uso económico.. Valores ejemplo: Alimentos y Bebidas Básicos, Alimentos y Bebidas Elaborados, Artículos de Consumo Duraderos, Artículos de Consumo No Duraderos, Artículos de Consumo Semiduraderos, Bienes de Capital (excepto el equipo de transporte), Bienes no especificados en otra partida, Combustibles y Lubricantes Básicos, Combustibles y Lubricantes Elaborados, Otros Vehículos. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Categ. Básicas GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Clasificación intermedia que agrupa los bienes exportados según categorías básicas de uso económico.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Categ. Básicas GCE Rev.3",
@@ -126122,7 +126122,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Mes del año en el que se efectuó el despacho aduanero de exportación.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Mes del año en el que se efectuó el despacho aduanero de exportación.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -126256,7 +126256,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identifica el modo de transporte utilizado para desplazar la mercancía hasta la frontera o destino final.. Valores ejemplo: Aéreo, Carretero, Ductos, Ferroviario, Fluvial, Otros. Jerarquía: .",
+        "texto": "Columna Dimensión: Medio de Transporte. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identifica el modo de transporte utilizado para desplazar la mercancía hasta la frontera o destino final.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Medio de Transporte",
@@ -126330,7 +126330,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Vía de Salida. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Punto logístico o aduanero fronterizo por donde la mercancía abandona legalmente el territorio nacional.. Valores ejemplo: Aérea, Amazonas-Cobija-Guayaramerín, Antofagasta-Ollague-Uyuni, Apacheta-Antofagasta, Arica-Charaña-Tambo Quemado, Boyuibe-Fortin Villazón, Charaña-Arica, Corumbá-Puerto Suárez, Desaguadero, Desconocida. Jerarquía: .",
+        "texto": "Columna Dimensión: Vía de Salida. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Punto logístico o aduanero fronterizo por donde la mercancía abandona legalmente el territorio nacional.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Vía de Salida",
@@ -126534,7 +126534,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: País Destino. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: País receptor final de las mercancías bolivianas según la declaración de exportación.. Valores ejemplo: Afganistan, Albania, Alemania, Andorra, Angola, Anguilla, Antillas Holandesas, Arabia Saudita, Argelia, Argentina. Jerarquía: .",
+        "texto": "Columna Dimensión: País Destino. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: País receptor final de las mercancías bolivianas según la declaración de exportación.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "País Destino",
@@ -128388,7 +128388,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Departamento de origen de la mercancía exportada, indicando la procedencia productiva dentro de Bolivia.. Valores ejemplo: Beni, Chuquisaca, Cochabamba, La Paz, No Especificado, Oruro, Pando, Potosí, Santa Cruz, Tarija. Jerarquía: .",
+        "texto": "Columna Dimensión: Departamento. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Departamento de origen de la mercancía exportada, indicando la procedencia productiva dentro de Bolivia.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Departamento",
@@ -128502,7 +128502,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identificador numérico estandarizado internacionalmente para las subcategorías económicas de comercio exterior.. Valores ejemplo: 111, 112, 121, 122, 210, 220, 310, 321, 322, 410. Jerarquía: .",
+        "texto": "Columna Dimensión: Código GCER Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Identificador numérico estandarizado internacionalmente para las subcategorías económicas de comercio exterior.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Código GCER Rev.3",
@@ -128706,7 +128706,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Nivel superior de agrupación que clasifica los bienes según su rol macroeconómico (Capital, Consumo, Combustibles, etc.).. Valores ejemplo: Alimentos y Bebidas, Artículos de consumo no especificados en otra partida, Bienes de Capital (excepto el equipo de transporte) y sus piezas y accesorios, Bienes no especificados en otra partida, Combustibles y Lubrincantes, Equipo de Transporte, sus piezas y accesorios, Suministros Industriales no especificados en otra partida. Jerarquía: .",
+        "texto": "Columna Dimensión: Grandes Categ. GCE Rev.3. Pertenece a la Tabla: S_BOINE_44_000563. Descripción: Nivel superior de agrupación que clasifica los bienes según su rol macroeconómico (Capital, Consumo, Combustibles, etc.).. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Grandes Categ. GCE Rev.3",
@@ -129161,7 +129161,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Identifica el año calendario al que corresponden los saldos de la cartera crediticia reportada al cierre de gestión o periodo.. Valores ejemplo: 2017, 2016, 2012, 2018, 2009, 2005, 2024, 2013, 2021, 2003. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Identifica el año calendario al que corresponden los saldos de la cartera crediticia reportada al cierre de gestión o periodo.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -129435,7 +129435,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Garantía Nv1. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Garantía Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada tipo de garantía del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 3, 11, 8, 9, 10, 7, 1, 5, 2, 4. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Garantía Nv1. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Garantía Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada tipo de garantía del primer nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Garantía Nv1",
@@ -129559,7 +129559,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Garantía Nv2. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Garantía Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subtipo de garantía del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 23, 24, 11, 8, 19, 99, 4, 21, 3, 22. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Garantía Nv2. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Garantía Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada subtipo de garantía del segundo nivel, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Garantía Nv2",
@@ -129803,7 +129803,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Garantía Nv1. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Categoría principal que clasifica los respaldos o colaterales que garantizan el crédito según su naturaleza técnica y jurídica ante la ASFI.. Valores ejemplo: Hipotecaria, Prendaria, Garantias no Convencionales, Garantia Personal, Garantias de Otras Entidades Financieras, Otras Garantías, Sin Garantia (Sola Firma), Bonos de Prenda (Warrant), Titulos Valores, Garantias de Otras Entidades Financieras A. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Garantía Nv1. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Categoría principal que clasifica los respaldos o colaterales que garantizan el crédito según su naturaleza técnica y jurídica ante la ASFI.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Garantía Nv1",
@@ -129927,7 +129927,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Trimestre. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Identifica el periodo de tres meses (I, II, III o IV) al que corresponde el corte de los saldos de la cartera de créditos.. Valores ejemplo: II, III, IV, I. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Trimestre. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Identifica el periodo de tres meses (I, II, III o IV) al que corresponde el corte de los saldos de la cartera de créditos.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Trimestre",
@@ -129981,7 +129981,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Agrupa a las instituciones financieras según su constitución legal y el segmento regulatorio autorizado para operar en el sistema financiero.. Valores ejemplo: Cooperativa, EFV, EIF 2do. Piso, Banco Múltiple, Fondo, Cooperativa Societaria, Mutual, IFD, Banco PyME, Banco. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Tipo Entidad. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Agrupa a las instituciones financieras según su constitución legal y el segmento regulatorio autorizado para operar en el sistema financiero.. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Entidad",
@@ -130095,7 +130095,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Entidad. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Siglas oficiales que identifican de forma unívoca a la entidad de intermediación financiera supervisada que reporta la información.. Valores ejemplo: BFS, FAC, CMO, ISA, VPG, CMR, CCP, BDB, CIH, MLF. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Entidad. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Siglas oficiales que identifican de forma unívoca a la entidad de intermediación financiera supervisada que reporta la información.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Entidad",
@@ -131029,7 +131029,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Garantía Nv2. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Desglose específico o subtipo de garantía que detalla el instrumento o bien pignorado como colateral de la operación crediticia.. Valores ejemplo: Avales o Certificaciones GNC  (NC6), Fondo de Garantía GNC (NC1) (b), Semoviente GNC (NC8), Otras Garantias, Contratos o documentos  de compromiso de venta a futuro (NC5), Fondo de Garantía, Valor Prepagado de Cartas de Credito, Activos no Sujetos a Registro de Propiedad (NC4), Otros Depositos en la Entidad Financiera, Seguro Agrario (NC2). Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Garantía Nv2. Pertenece a la Tabla: clf_crt_tip_gar. Descripción: Desglose específico o subtipo de garantía que detalla el instrumento o bien pignorado como colateral de la operación crediticia.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Garantía Nv2",
@@ -131619,7 +131619,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Indicador Nv1. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría macro de indicadores para las IFDs, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 4, 14, 3, 13, 10, 9, 7, 1, 5, 2. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Indicador Nv1. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv1\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada categoría macro de indicadores para las IFDs, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Indicador Nv1",
@@ -131773,7 +131773,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: orden Indicador Nv2. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada indicador específico del sector microfinanciero, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 12, 3, 11, 8, 9, 10, 7, 1, 5, 4. Jerarquía: .",
+        "texto": "Columna Dimensión: orden Indicador Nv2. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Indicador Nv2\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada indicador específico del sector microfinanciero, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "orden Indicador Nv2",
@@ -131907,7 +131907,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Identifica el año calendario correspondiente al reporte mensual de los indicadores financieros de las Instituciones Financieras de Desarrollo.. Valores ejemplo: 2024, 2013, 2021, 2015, 2008, 2023, 2014, 2010, 2025, 2019. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Identifica el año calendario correspondiente al reporte mensual de los indicadores financieros de las Instituciones Financieras de Desarrollo.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -132101,7 +132101,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Nombre o sigla oficial de la Institución Financiera de Desarrollo (IFD) asociada a Finrural para la cual se reportan los indicadores financieros. Valores ejemplo: FADES, EMPRENDER, IMPRO, FONCRESOL, CRECER, PROMUJER, FONDECO, CIDRE, SARTAWI, DIACONIA. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Entidad Financiera. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Nombre o sigla oficial de la Institución Financiera de Desarrollo (IFD) asociada a Finrural para la cual se reportan los indicadores financieros. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Entidad Financiera",
@@ -132265,7 +132265,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Mes del año al que corresponde el cálculo del indicador financiero, permitiendo el análisis de tendencias mensuales.. Valores ejemplo: Enero, Febrero, Julio, Marzo, Octubre, Junio, Abril, Septiembre, Noviembre, Agosto. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Mes del año al que corresponde el cálculo del indicador financiero, permitiendo el análisis de tendencias mensuales.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -132399,7 +132399,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Indicador Nv2. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Nombre técnico detallado del indicador financiero calculado. Incluye fórmulas de calidad de cartera, spreads operativos y ratios de solvencia específicos para el sector microfinanciero.. Valores ejemplo: CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO, Disponibilidades + Inversiones Temporarias / Activo, Cartera Reprog. o Reestruct. Vencida y Ejec. / Cartera Reprog. o Reestruct., UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO, Oblig.con el público/Pasivo+Patrimonio, Otros Gastos Administración/Gastos de Administración, Gastos Financieros / Activo+Contingente, Patrimonio/Activo+Contingente, Obligaciones subordinadas/Pasivo+Patrimonio, Otros Ingresos Operativos Netos / Activo+Contingente. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Indicador Nv2. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Nombre técnico detallado del indicador financiero calculado. Incluye fórmulas de calidad de cartera, spreads operativos y ratios de solvencia específicos para el sector microfinanciero.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Indicador Nv2",
@@ -133273,7 +133273,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Indicador Nv1. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Agrupación macro de indicadores según el área de desempeño financiero (ej: Calidad de Cartera, Eficiencia, Rentabilidad) para las IFDs.. Valores ejemplo: INGRESOS Y GASTOS FINANCIEROS, EFICIENCIA ADMINISTRATIVA, SOLVENCIA, RESULTADOS, EFICIENCIA ADMINISTRATIVA - RATIOS DE EFICIENCIA, UTILIZACIÓN DEL SPREAD EFECTIVO, ESTRUCTURA FINANCIERA, CÁLCULO SPREAD EFECTIVO, EFICIENCIA ADMINISTRATIVA - ESTRUCTURA DE GASTOS DE ADMINISTRACIÓN, CALIDAD DE CARTERA. Jerarquía: J-3-1.",
+        "texto": "Columna Dimensión: Indicador Nv1. Pertenece a la Tabla: S_BOFINR44_00387. Descripción: Agrupación macro de indicadores según el área de desempeño financiero (ej: Calidad de Cartera, Eficiencia, Rentabilidad) para las IFDs.. Jerarquía: J-3-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Indicador Nv1",
@@ -134904,7 +134904,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa el año calendario en el que se registraron las consultas externas en los establecimientos de salud.. Valores ejemplo: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025. Jerarquía: J-1-1.",
+        "texto": "Columna Dimensión: Año. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa el año calendario en el que se registraron las consultas externas en los establecimientos de salud.. Jerarquía: J-1-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Año",
@@ -135018,7 +135018,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: order Grupo Etareo. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grupo Etareo\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada grupo etáreo, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Valores ejemplo: 2, 8, 9, 14, 17, 21, 24, 27, 30, 33. Jerarquía: .",
+        "texto": "Columna Dimensión: order Grupo Etareo. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa el orden en el que debe ser desplegada la informacion de la columna \"Grupo Etareo\" en un reporte o visualizacion. Esta columna contiene el numero de orden de cada grupo etáreo, lo que permite organizar y presentar la informacion de manera estructurada y coherente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "order Grupo Etareo",
@@ -135132,7 +135132,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Clasifica los centros de salud según su infraestructura y capacidad resolutiva dentro del sistema sanitario nacional.. Valores ejemplo: Banco de Sangre, C. Caracteristicas Part., Centro de Aislamiento, Centro Salud, Clinica, C.S. Ambulatorio, C.S. con Internacion, C.S. Integral, Hospital General, Hospital Segundo Nivel. Jerarquía: J-2-1.",
+        "texto": "Columna Dimensión: Tipo Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Clasifica los centros de salud según su infraestructura y capacidad resolutiva dentro del sistema sanitario nacional.. Jerarquía: J-2-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo Establecimiento",
@@ -135306,7 +135306,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Nivel Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Indica el nivel de complejidad del establecimiento (1er, 2do o 3er nivel) según la normativa de niveles de atención en salud.. Valores ejemplo: 1er Nivel, 2do Nivel, 3er Nivel, Banco de Sangre, IDE, T. Nuclear. Jerarquía: .",
+        "texto": "Columna Dimensión: Nivel Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Indica el nivel de complejidad del establecimiento (1er, 2do o 3er nivel) según la normativa de niveles de atención en salud.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Nivel Establecimiento",
@@ -135380,7 +135380,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Establecimiento SNIS. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Nombre oficial del centro de salud o establecimiento específico donde se realizó la atención médica registrada.. Valores ejemplo: 16 DE JULIO PROSALUD, 25 DE MAYO, ACHACACHI, ADOLFO KOLPING, A I N CENTRO DE HEMODIALISIS, ANGOSTURA, ANTHURA, ASUNCION SACABA, BANCA PRIVADA, BANCARIA ESTATAL. Jerarquía: J-2-2.",
+        "texto": "Columna Dimensión: Establecimiento SNIS. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Nombre oficial del centro de salud o establecimiento específico donde se realizó la atención médica registrada.. Jerarquía: J-2-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Establecimiento SNIS",
@@ -142684,7 +142684,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Sede. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica el departamento o unidad territorial de primer nivel donde se ubica el establecimiento de salud.. Valores ejemplo: Beni, Chuquisaca, Cochabamba, La Paz, Oruro, Pando, Potosi, Santa Cruz, Tarija. Jerarquía: .",
+        "texto": "Columna Dimensión: Sede. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica el departamento o unidad territorial de primer nivel donde se ubica el establecimiento de salud.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Sede",
@@ -142788,7 +142788,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Provincia. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: División política de segundo nivel que agrupa a los municipios donde se encuentran distribuidos los centros de salud.. Valores ejemplo: Abel Iturralde, Alonso De Ibañez, Andres Ibañez, Antonio Quijarro, Arce, Aroma, Avaroa, Ayopaya, Azurduy, Burnet O´Connor. Jerarquía: .",
+        "texto": "Columna Dimensión: Provincia. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: División política de segundo nivel que agrupa a los municipios donde se encuentran distribuidos los centros de salud.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Provincia",
@@ -143492,7 +143492,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Municipio. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: . Valores ejemplo: Achacachi, Aiquile, Arampampa, Ascencion De Guarayos, Atocha, Ayopaya (V. De Independencia), Azurduy, Bermejo, Cabezas, Camargo. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Municipio. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: . Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Municipio",
@@ -144546,7 +144546,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Codigo Municipio. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identificador numérico estandarizado utilizado para la geolocalización y vinculación administrativa de los municipios.. Valores ejemplo: 010101, 010102, 010103, 010201, 010202, 010301, 010401, 010403, 010501, 010502. Jerarquía: .",
+        "texto": "Columna Dimensión: Codigo Municipio. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identificador numérico estandarizado utilizado para la geolocalización y vinculación administrativa de los municipios.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Codigo Municipio",
@@ -145600,7 +145600,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Red Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa la agrupación administrativa y técnica de centros de salud que operan coordinadamente en un área geográfica.. Valores ejemplo: 01 Trinidad, 02 Moxos, 05 Yacuma, 06 Ballivian, 07 Riberalta, 08 Guayaramerin, 09 San Borja, Aiquile, Azanaque, Bermejo. Jerarquía: J-3-2.",
+        "texto": "Columna Dimensión: Red Establecimiento. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Representa la agrupación administrativa y técnica de centros de salud que operan coordinadamente en un área geográfica.. Jerarquía: J-3-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Red Establecimiento",
@@ -146564,7 +146564,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Ambito. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Diferencia el entorno de ubicación del servicio de salud entre zonas urbanas y rurales.. Valores ejemplo: Rural, Urbano. Jerarquía: .",
+        "texto": "Columna Dimensión: Ambito. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Diferencia el entorno de ubicación del servicio de salud entre zonas urbanas y rurales.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Ambito",
@@ -146598,7 +146598,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Subsector. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Clasifica el origen administrativo y de financiamiento del servicio (ej: Público, Seguridad Social, Iglesia).. Valores ejemplo: FF.AA. de la Nación, Iglesia, Organismos no Gubernamentales, Organismos Privados, Policia Boliviana, Policia Nacional, Público, Seguridad Social (CAJAS). Jerarquía: .",
+        "texto": "Columna Dimensión: Subsector. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Clasifica el origen administrativo y de financiamiento del servicio (ej: Público, Seguridad Social, Iglesia).. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Subsector",
@@ -146692,7 +146692,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Grupo Etareo. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Segmentación demográfica del paciente atendido basada en rangos de edad biológica.. Valores ejemplo: 10 - 14 años, 1 - 4 años, 15 - 19 años, 20 - 39 años, 40 - 49 años, 50 - 59 años, 5 - 9 años, 60 años y más, 6 meses a menor de 1 año, Menor de 6 meses. Jerarquía: .",
+        "texto": "Columna Dimensión: Grupo Etareo. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Segmentación demográfica del paciente atendido basada en rangos de edad biológica.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Grupo Etareo",
@@ -146806,7 +146806,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo de Especialidad. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica la rama de la medicina o especialidad técnica bajo la cual se realizó la atención médica.. Valores ejemplo: Alergologia, Anestesiologia, Angiologia, Cardiologia, Cirugia Cardiovascular, Cirugia de Transplante, Cirugia Gastroenterologica, Cirugia General, Cirugia Maxilo Facial, Cirugia Oftalmologica. Jerarquía: J-4-1.",
+        "texto": "Columna Dimensión: Tipo de Especialidad. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica la rama de la medicina o especialidad técnica bajo la cual se realizó la atención médica.. Jerarquía: J-4-1.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo de Especialidad",
@@ -147500,7 +147500,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Genero. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Segmentación de la atención basada en el sexo biológico del paciente.. Valores ejemplo: Hombre, Mujer. Jerarquía: .",
+        "texto": "Columna Dimensión: Genero. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Segmentación de la atención basada en el sexo biológico del paciente.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Genero",
@@ -147534,7 +147534,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Tipo de Consulta. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Diferencia si la atención corresponde a un caso nuevo o a un seguimiento (repetido) de una patología previa.. Valores ejemplo: Nuevo, Repetido. Jerarquía: .",
+        "texto": "Columna Dimensión: Tipo de Consulta. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Diferencia si la atención corresponde a un caso nuevo o a un seguimiento (repetido) de una patología previa.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Tipo de Consulta",
@@ -147568,7 +147568,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Periodo mensual del año al que corresponden los registros de actividad asistencial.. Valores ejemplo: Abril, Agosto, Diciembre, Enero, Febrero, Julio, Junio, Marzo, Mayo, Noviembre. Jerarquía: J-1-2.",
+        "texto": "Columna Dimensión: Mes. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Periodo mensual del año al que corresponden los registros de actividad asistencial.. Jerarquía: J-1-2.",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Mes",
@@ -147702,7 +147702,7 @@
         }
     },
     {
-        "texto": "Columna Dimensión: Institución. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica a la entidad matriz o ente gestor responsable de la administración del establecimiento de salud.. Valores ejemplo: ABEN, Cabildo Indigenal, Caja Bancaria Estatal, Caja de Salud CORDES, Caja de Salud de Caminos y R.A., Caja de Salud de La Banca Privada, Caja Nacional de Salud, Caja Petrolera de Salud, C.C.H. - (Ministerio), C.I.E.S.. Jerarquía: .",
+        "texto": "Columna Dimensión: Institución. Pertenece a la Tabla: S_BOSNIS44_000787. Descripción: Identifica a la entidad matriz o ente gestor responsable de la administración del establecimiento de salud.. Jerarquía: .",
         "payload": {
             "tipo": "dimension",
             "nombre_columna": "Institución",

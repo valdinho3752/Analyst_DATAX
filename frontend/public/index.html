@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst DATAX | Data Scout AI</title>
+    <!-- Importar fuentes modernas de alto impacto -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i data-lucide="database"></i>
+                </div>
+                <h2>Analyst DATAX</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-item active">
+                    <i data-lucide="message-square"></i>
+                    <span>Consultas</span>
+                </div>
+                <div class="nav-item">
+                    <i data-lucide="history"></i>
+                    <span>Historial (<small>Pronto</small>)</span>
+                </div>
+                <div class="nav-item">
+                    <i data-lucide="settings"></i>
+                    <span>Ajustes</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="agent-status online">
+                    <div class="status-dot"></div>
+                    <span id="agent-status-text">Data Scout AI Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container glass-panel">
+            <header class="chat-header">
+                <h3>Analista Financiero (A2A Host Agent)</h3>
+                <span class="subtitle">Banca, Seguros y Valores de Bolivia</span>
+            </header>
+
+            <div class="chat-history" id="chat-history">
+                <!-- Welcome Message -->
+                <div class="message system-message fade-in">
+                    <div class="avatar system-avatar">
+                        <i data-lucide="bot"></i>
+                    </div>
+                    <div class="message-bubble">
+                        ¡Hola! Soy tu <b>Arquitecto de Datos</b>. Escríbeme cualquier consulta sobre indicadores financieros de aseguradoras o bancos, y extraeré el esquema oficial y escribiré el código SQL exacto por ti. 
+                        No es necesario que conozcas los nombres técnicos, yo me encargo de hacer el "Data Scouting".
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-glass-wrapper">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Ej. Cual es el monto disponible en bancos de Bisa Seguros en las últimas 3 gestiones?" 
+                        rows="1"
+                    ></textarea>
+                    
+                    <button class="send-btn" id="send-btn">
+                        <i data-lucide="send"></i>
+                    </button>
+                </div>
+                <div class="typing-indicator hidden" id="typing-indicator">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <span> El Agente está investigando...</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Init Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

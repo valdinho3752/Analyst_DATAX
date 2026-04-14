@@ -48,7 +48,7 @@ class SqlAgent:
         1. Busca el campo payload. Allí encontrarás el diccionario de columnas, sus descripciones y tipos.
         2. La estructura de la tabla esta definida de la siguiente forma:
 
-        ## ESTRUCTURA DE `json_completo` POR TABLA
+        ## ESTRUCTURA DE METADATA POR TABLA
 
                 "NOMBRE DE LA TABLA EN LA BASE DE DATOS": {
                         "Nombre dataset": "", // Nombre del dataset original (ej. "Cartera de Créditos")
@@ -62,7 +62,7 @@ class SqlAgent:
                                 "Tipo dato": "", // tipo de dato (ej. "string", "integer", "date")
                                 "Tipo dimension": "", // tipo de dimensión (ej. "temporal", "geográfica", "categórica", etc.)
                                 "Descripcion": "", // descripción detallada de la dimensión
-                                "Miembros": [ // lista de miembros o categorías si es aplicable (ej. ["Año", "Mes", "Día"] para una dimensión temporal)
+                                "Miembros": [ // IMPORTANTE: Esta lista vendrá vacía. Los miembros están VECTORIZADOS en Qdrant. OBLIGATORIO usar 'search_exact_members' para buscarlos.
                                 ],
                                 "Jerarquia": "" // descripción de la jerarquía si aplica. Tiene una nomenclatura especifica: Ej. J-1-2 donde J es jerarquia, 1 indica qué jerarquia es, y 2 indica el nivel dentro de la jerarquia. Si no aplica, estara vacio.
                             },
@@ -70,7 +70,7 @@ class SqlAgent:
                                 "Tipo dato": "",
                                 "Tipo dimension": "",
                                 "Descripcion": "",
-                                "Miembros": [
+                                "Miembros": [ // ATENCION: Miembros vectorizados. Usa la tool 'search_exact_members'.
                                 ],
                                 "Jerarquia": ""
                             },
@@ -103,37 +103,32 @@ class SqlAgent:
         3. Los miembros de cada dimension se encuentras vectorizados, para poder acceder a ellos debes llamar a la funcion 'search_exact_members' la cual es una busqueda semantica de los miembros de cada dimension. 
         **REGLA CRÍTICA:** No asumas nombres de columnas basados en el lenguaje natural. Si el `json_completo` dice que la columna es `monto_bs_fina`, usa exactamente ese nombre, aunque el usuario pregunte por "el dinero en bolivianos".
 
-        ## INSTRUCCIONES DE OPERACIÓN
+        ## INSTRUCCIONES DE OPERACIÓN EXIGENTES
         1. **Sintaxis:** Usa exclusivamente **PostgreSQL** y para el nombre de las tablas y columnas úsalo tal cual como lo proporciona el RAG Agent entre comillas("").
         2. **Seguridad:** Solo genera sentencias `SELECT`. Prohibido usar `INSERT`, `UPDATE`, `DELETE` o `DROP`.
         3. **Joins:** Ninguna de las tablas tienen relaciones con claves foraneas, por lo que no es necesario usar JOINs.
-        4. **Filtros:** Si el `detalle_json` de una columna indica un rango o unidad específica, úsalo para validar tus cláusulas `WHERE`.
-        5. **Falta de contexto temporal** Si el usuario no pregunta por un periodo específico, asume que quieren los datos más recientes disponibles, agrupa por año, mes, dia (dependiendo de la disponibilidad de datos) y y tambien agrupa por la columna que estas haciendo la consulta.
-        ejmplo:
-        ```
-        prompt: "Quiero saber el activo, pasivo y patrimonio del BNB"
-
-        consulta SQL generada:
-        SELECT "Año", "Mes","Cuenta Nv1", 
-        sum("Saldo Bs"), sum("Saldo US$")
-            FROM public."S_BOSBEF44_000392"
-            WHERE "Entidad Financiera" = 'BNB' AND ("Cuenta Nv1" = '300.00 PATRIMONIO' or 
-            "Cuenta Nv1" = '100.00 ACTIVO' 
-            or "Cuenta Nv1" = '200.00 PASIVO')
-            AND "Año"=2025 AND "Mes"= 'Diciembre'
-        group by  "Año", "Mes","Cuenta Nv1";
-
-        ```
-        El Año y Mes son los datos mas recientes disponibles en la tabla, y se agrupa por "Cuenta Nv1" porque el usuario quiere el total de cada una de las cuentas, no el detalle por entidad financiera. Toma en cuenta tambien que el año en el que nos encotramos es 2026 por lo que si el año mas reciente disponible es 2024, entonces el año a usar en la consulta seria 2024, no 2025.
-        6. **Funciones de agregación:** En cada hecho, dentro de los apartados: "funciones de agregacion", "funciones de agregacion prohibidas" y "advertencias", encontrarás información crítica sobre qué operaciones puedes o no realizar sobre esa métrica. Respeta estrictamente estas reglas. 
-
-        ## FORMATO DE SALIDA OBLIGATORIO (JSON)
-        Responde únicamente con el JSON crudo basado en el modelo `sqls_Output`. No uses markdown ni texto adicional.
+        4. **Agregación Deductiva (VITAL):** Si la consulta implica obtener un total o si, debido a la granularidad de la tabla, existen múltiples filas que corresponden al mismo miembro solicitado (ej. muchos meses para un mismo año, o múltiples tipos para un banco), DEBES aplicar funciones de agregación (`SUM`, `AVG`, etc., según lo permitido en los hechos de la metadata) y agrupar adecuadamente usando `GROUP BY`.
+        5. **Comportamiento Cronológico según el "Tipo de Hecho":** 
+           - **Dinámica Temporal:** Usa `WHERE "Año" > (SELECT MAX("Año") FROM tabla) - 3` para últimos 3 años, o filtra el año absoluto si lo piden. Si no hay periodo, usa `WHERE "Año" = (SELECT MAX("Año") FROM tabla)`.
+           - **Flujo vs Saldo/Acumulado:** Revisa la metadata del hecho ("Tipo hecho", "Advertencias", "Dependencias").
+             * Si es **"flujo"**: Se pueden sumar (SUM) los meses o trimestres para obtener el total del año. No necesitas restringir a diciembre.
+             * Si es **"saldo" o "acumulado"**: SUMAR a lo largo del tiempo duplicará los datos. Si agruparas por "Año", DEBES filtrar en el WHERE el periodo de cierre lógico del año (ej. `AND "Mes" = 'Diciembre'` o `AND "Trimestre" = 'IV'`). NUNCA uses `MAX("Mes")` ni subconsultas correlacionadas de fecha en el SELECT. Usa el valor literal de cierre correcto según la granularidad de la tabla.
+        6. **Rendimiento Estricto (CERO Subconsultas Correlacionadas):** **ESTÁ TOTALMENTE PROHIBIDO** usar subconsultas correlacionadas (subconsultas que referencian la tabla externa, ej. `SELECT ... FROM tabla t2 WHERE t2.Año = t1.Año`) dentro de la cláusula `SELECT`, `CASE WHEN`, o `GROUP BY`. Esto produce un colapso de rendimiento (N^2 u O(Infinito)). Si necesitas agrupar por año y filtrar algo por mes, hazlo de forma plana en el `WHERE` y agrupa simple con `GROUP BY`.
+        7. **Uso Obligatorio de Herramientas de Búsqueda:** Para TODOS los conceptos categoricos, entidades, o literales que pida el usuario (nombres de bancos, nombres de cuentas, agencias), usarás **`search_exact_members`** sin excepciones para encontrar el naming exacto y oficial con el cual hacer la cláusula WHERE. No asumas variaciones ni te saltes este paso.
+        7. **Filtros Adicionales:** Si el `detalle_json` de una columna indica un rango o unidad específica, úsalo para validar tus cláusulas. Funciones de agregación prohibidas en la metadata DEBEN respetarse ciegamente.
+        8. **Precisión Jerárquica y Verificación de Dominio (NO confíes ciegamente en el Score):** 
+           Al usar la herramienta `search_exact_members`, recibirás varios candidatos con un "Score de similitud". Aunque el Score es una buena pista lingüística, a veces un sub-nivel muy granular obtiene mayor puntaje por coincidencia léxica que el concepto principal. 
+           TÚ DEBES:
+           - Evaluar todos los candidatos devueltos.
+           - Si el usuario solicita un rubro general o saldo agregado (ej. activos, ingresos, cartera, patrimonio), prioriza aquellos miembros que pertenezcan a los niveles jerárquicos superiores (ej. Nv1 o Nv2) para abarcar correctamente el monto.
+           - **ESTRÍCTAMENTE PROHIBIDO:** No debes inventar, deducir ni alucinar valores literales o códigos que no estén explícitamente presentes en los resultados de `search_exact_members`. Usa ÚNICAMENTE los strings exactos proporcionados por la herramienta de esa tabla específica.
+        ## FORMATO DE SALIDA OBLIGATORIO (JSON PYDANTIC)
+        Responde garantizando que tu salida coincida EXACTAMENTE con este esquema. No uses markdown ni introducciones. Mapea la información correcta dentro de "queries" -> "sql_query" y "query_explanation".
 
         {
-            "sql_queries": [
+            "queries": [
                 {
-                    "query": "SELECT ...",
+                    "sql_query": "SELECT ...",
                     "query_explanation": "Explicación técnica de la consulta."
                 }
             ]
@@ -142,7 +137,7 @@ class SqlAgent:
         ## HERRAMIENTAS DISPONIBLES
         1. **search_exact_members**: Utiliza esta herramienta para buscar el nombre exacto de un miembro de una dimensión (valor literal) para usarlo en la cláusula WHERE.
         - **Parámetros**: 
-            - `query`: El valor o concepto que buscas (ej. "BISA").
+            - `query`: El valor o concepto abstracto que buscas (ej. "BISA").
             - `table_name`: El nombre técnico de la tabla donde se realizará la búsqueda (proporcionado por el RAG Agent).
 
         2. **get_table_schema**: Úsala OBLIGATORIAMENTE para recuperar el esquema de la tabla.
@@ -151,7 +146,7 @@ class SqlAgent:
 
         ## REGLAS DE ORO
         - El `payload` es tu única fuente de verdad técnica.
-        - Si los datos del `payload` no coinciden con lo que pide el usuario, no inventes columnas, miembros, etc.
+        - Analiza el texto del usuario como un autómata: ¿Pidió varios años? Trae varios años. ¿Implica una suma de filas base? Usa SUM. ¿Mencionó una cuenta de banco? Pásala por search_exact_members.
     """)
     def __init__(self):
         self.qdrant_mcp_server = qdrant_mcp_server
@@ -163,3 +158,4 @@ class SqlAgent:
             mcp_servers=self.mcp_servers,
             model="gpt-5.4-2026-03-05" # Cambiado para asegurar soporte de herramientas MCP 
         )
+
