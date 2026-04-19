@@ -68,7 +68,6 @@ services:
       start_period: 120s
     volumes:
       - ./mcp_server:/app
-      - ./secrets/ragagent-secrets.json:/app/gcp-key.json:ro
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PYTHONUNBUFFERED=1
@@ -76,7 +75,7 @@ services:
       - QDRANT_URL=http://qdrant_openai:6333
     depends_on:
       qdrant_openai:
-        condition: service_started
+        condition: service_healthy
 
   db:
     container_name: postgres_rag_openai
@@ -110,6 +109,12 @@ services:
       - 6339
     volumes:
       - ./qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/localhost/6333'"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 15s
 
   frontend_openai:
     build:

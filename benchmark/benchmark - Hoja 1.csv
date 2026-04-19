@@ -1,0 +1,268 @@
+prompt,consulta esperada (o parecida),tabla esperada,dimension esperada,hecho esperado,agragacion,primer intento,segundo intento,tercer intento
+cual es el monto de activo disponible que tuvo el banco bisa al cierre de balance anual de los últimos 3 años?,"SELECT ""Año"", SUM(""Saldo Bs"") AS ""Monto Activo Disponible Bs"", SUM(""Saldo US$"") AS ""Monto Activo Disponible USD"" FROM ""S_BOSBEF44_000392"" WHERE ""Entidad Financiera"" = 'BIS' AND ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES' AND ""Mes"" = 'Diciembre' AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3 GROUP BY ""Año"" ORDER BY ""Año"" DESC",S_BOSBEF44_000392,"Año, ""Entidad Financiera"" = 'BIS', ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES'","""Saldo Bs"" o ""Saldo US$""",SUM,"SELECT ""Año"", SUM(""Saldo Bs"") AS ""monto_activo_disponible_bs""
+FROM ""S_BOSBEF44_000392""
+WHERE ""Entidad Financiera"" = 'BIS'
+  AND ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT 
+    ""Año"", 
+    SUM(""Saldo Bs"") AS ""monto_activo_disponible_bs"" 
+FROM 
+    ""S_BOSBEF44_000392"" 
+WHERE 
+    ""Entidad Financiera"" = 'BIS' 
+    AND ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES' 
+    AND ""Mes"" = 'Diciembre' 
+    AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3 
+GROUP BY 
+    ""Año"" 
+ORDER BY 
+    ""Año"";","SELECT ""Año"", SUM(""Saldo Bs"") AS ""Saldo Bs""
+FROM ""S_BOSBEF44_000392""
+WHERE ""Entidad Financiera"" = 'BIS'
+  AND ""Cuenta Nv1"" = '100.00 ACTIVO'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";"
+cual es el monto de disponibilidades que tuvo el banco bisa en sus ultimas 3 gestiones?,"SELECT ""Año"", SUM(""Saldo Bs"") AS ""Monto Activo Disponible Bs"", SUM(""Saldo US$"") AS ""Monto Activo Disponible USD"" FROM ""S_BOSBEF44_000392"" WHERE ""Entidad Financiera"" = 'BIS' AND ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES' AND ""Mes"" = 'Diciembre' AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3 GROUP BY ""Año"" ORDER BY ""Año"" DESC",S_BOSBEF44_000392,"Año, ""Entidad Financiera"" = 'BIS', ""Cuenta Nv2"" = '110.00 DISPONIBILIDADES'",,SUM,"SELECT ""Año"", SUM(""Monto Bs"") AS ""monto_disponibilidades_bs""
+FROM ""S_BOASFI66_000728""
+WHERE ""Entidad"" = 'BIS'
+  AND ""Trimestre"" = 'IV'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOASFI66_000728"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Saldo Bs"") AS ""monto_disponibilidades_bs""
+FROM ""S_BOSBEF44_000392""
+WHERE ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3
+AND ""Mes"" = 'Diciembre'
+AND ""Entidad Financiera"" = 'BIS'
+AND ""Tipo Entidad Financiera"" = 'Banco'
+AND ""Cuenta Nv3"" IN ('871.00 DISPONIBILIDADES', '881.00 DISPONIBILIDADES')
+GROUP BY ""Año""
+ORDER BY ""Año"" DESC;","SELECT ""Año"", ""Saldo Bs"" 
+FROM ""S_BOSBEF44_000392"" 
+WHERE ""Entidad Financiera"" = 'BIS' 
+AND ""Cuenta Nv3"" = '871.00 DISPONIBILIDADES' 
+AND ""Mes"" = 'Diciembre' 
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOSBEF44_000392"") - 3 
+ORDER BY ""Año"";"
+Cual es el monto del activo disponible con el que cerro su gestión BISA seguros en los últimos 3 años?,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""Monto_Activo_Disponible_Bs"" FROM ""S_BOAPS_44_000612"" WHERE ""Aseguradora"" = 'BISA' AND ""Cuenta Financiera Nv1"" = '1 ACTIVO' AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' AND ""Mes"" = 'Diciembre' AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 GROUP BY ""Año"" ORDER BY ""Año"" DESC;",S_BOAPS_44_000612,"""Año"", ""Mes"", ""Aseguradora"" = 'BISA', ""Cuenta Financiera Nv1"" = '1 ACTIVO', ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' ","""Monto Acumulado Bs""",SUM,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_activo_disponible_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_activo_disponible_bs"" 
+FROM ""S_BOAPS_44_000612"" 
+WHERE ""Aseguradora"" = 'BISA' 
+AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' 
+AND ""Mes"" = 'Diciembre' 
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 
+GROUP BY ""Año"" 
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_activo_disponible_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"" DESC;"
+Cual es el monto de disponibilidades de las últimas 3 gestiones de BISA Seguros?,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""Monto_Activo_Disponible_Bs"" FROM ""S_BOAPS_44_000612"" WHERE ""Aseguradora"" = 'BISA' AND ""Cuenta Financiera Nv1"" = '1 ACTIVO' AND cAND ""Mes"" = 'Diciembre' AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 GROUP BY ""Año"" ORDER BY ""Año"" DESC;",S_BOAPS_44_000612,"""Año"", ""Mes"", ""Aseguradora"" = 'BISA', ""Cuenta Financiera Nv1"" = '1 ACTIVO', ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' ","""Monto Acumulado Bs""",SUM,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponibilidades_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+AND ""Mes"" = 'Diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponibilidades_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA' 
+AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' 
+AND ""Mes"" = 'Diciembre' 
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 
+GROUP BY ""Año"" 
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponibilidades_bs"" 
+FROM ""S_BOAPS_44_000612"" 
+WHERE ""Aseguradora"" = 'BISA' 
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' 
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 
+  AND ""Mes"" = 'Diciembre' 
+GROUP BY ""Año"" 
+ORDER BY ""Año"";"
+cual es el monto que tiene disponible en bancos BISA seguros en las últimas 3 gestiones?,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponible_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Cuenta Financiera Nv4"" = '1010201 Bancos'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";",S_BOAPS_44_000612,"""Año"", ""Cuenta Financiera Nv2"" = '101 DISPONIBLE', ""Cuenta Financiera Nv4"" = '1010201 Bancos', ""Mes"" = 'Diciembre'","""Monto Acumulado Bs""",SUM,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponible_bancos_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv5"" = '106010201 Bancos comerciales nacionales'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+  AND ""Mes"" = 'Diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponible_bancos_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+AND ""Cuenta Financiera Nv4"" IN ('422020201 Bancos comerciales nacionales', '422020202 Bancos comerciales extranjeros')
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+AND ""Mes"" = 'Diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT
+  ""Año"",
+  SUM(""Monto Acumulado Bs"") AS ""monto_disponible_bs""
+FROM
+  ""S_BOAPS_44_000612""
+WHERE
+  ""Aseguradora"" = 'BISA' AND
+  ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' AND
+  ""Mes"" = 'Diciembre' AND
+  ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY
+  ""Año""
+ORDER BY
+  ""Año"";"
+Cuál es el monto que BISA seguros tiene depositado en bancos como parte de su activo disponible al cierre de sus últimas 3 gestiones?,"SELECT ""Año"", SUM(""Monto Acumulado Bs"") AS ""monto_disponible_bs""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Cuenta Financiera Nv4"" = '1010201 Bancos'
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"";",S_BOAPS_44_000612,"""Año"", ""Cuenta Financiera Nv2"" = '101 DISPONIBLE', ""Cuenta Financiera Nv4"" = '1010201 Bancos', ""Mes"" = 'Diciembre'","""Monto Acumulado Bs""",SUM,"SELECT ""Año"", SUM(""Monto Acumulado US$"") AS ""monto_depositado_bancos_usd""
+FROM ""S_BOAPS_44_000612""
+WHERE ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Cuenta Financiera Nv4"" IN ('422020101 Bancos comerciales nacionales', '422020201 Bancos comerciales nacionales')
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY ""Año""
+ORDER BY ""Año"" DESC;","SELECT 
+    ""Año"", 
+    SUM(""Monto Acumulado Bs"") AS ""monto_depositado_bancos_bs"" 
+FROM 
+    ""S_BOAPS_44_000612"" 
+WHERE 
+    ""Aseguradora"" = 'BISA' 
+    AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE' 
+    AND ""Cuenta Financiera Nv4"" IN ('422020101 Bancos comerciales nacionales', '422020201 Bancos comerciales nacionales') 
+    AND ""Mes"" = 'Diciembre' 
+    AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3 
+GROUP BY 
+    ""Año"" 
+ORDER BY 
+    ""Año"" DESC;","SELECT 
+  ""Año"", 
+  SUM(""Monto Acumulado Bs"") AS ""monto_bs_activo_disponible_bancos""
+FROM 
+  ""S_BOAPS_44_000612""
+WHERE 
+  ""Aseguradora"" = 'BISA'
+  AND ""Cuenta Financiera Nv2"" = '101 DISPONIBLE'
+  AND ""Cuenta Financiera Nv4"" IN ('422020101 Bancos comerciales nacionales', '422020201 Bancos comerciales nacionales')
+  AND ""Mes"" = 'Diciembre'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOAPS_44_000612"") - 3
+GROUP BY 
+  ""Año""
+ORDER BY 
+  ""Año"" DESC;"
+Quiero saber cuánto es la cartera vencida del total de la cartera de créditos de consumo que tiene el Banco Nacional respaldados por la garantía de depósitos en la entidad financiera?,No HAY,No HAY,No HAY,No HAY,No HAY,"SELECT SUM(""Monto Bs"") AS ""cartera_vencida_bs""
+FROM ""S_BOASFI66_000728""
+WHERE ""Año"" = (SELECT MAX(""Año"") FROM ""S_BOASFI66_000728"")
+  AND ""Trimestre"" = 'IV'
+  AND ""Estado Cartera"" = 'Vencida'
+  AND ""Entidad"" = 'BNA'
+  AND ""Tipo Crédito"" = 'Crédito de Consumo debidamente Garantizado';","SELECT 
+    SUM(CASE WHEN ""Estado Cartera"" = 'Vencida' THEN ""Monto Bs"" ELSE 0 END) AS ""cartera_vencida_bs"",
+    SUM(""Monto Bs"") AS ""cartera_total_bs"",
+    CASE WHEN SUM(""Monto Bs"") = 0 THEN NULL ELSE SUM(CASE WHEN ""Estado Cartera"" = 'Vencida' THEN ""Monto Bs"" ELSE 0 END) / SUM(""Monto Bs"") END AS ""proporcion_cartera_vencida""
+FROM ""S_BOASFI66_000728""
+WHERE 
+    ""Año"" = (SELECT MAX(""Año"") FROM ""S_BOASFI66_000728"") 
+    AND ""Trimestre"" = 'IV' 
+    AND ""Entidad"" = 'BNA' 
+    AND ""Tipo Crédito"" = 'Crédito de Consumo';","SELECT
+  s.""Año"",
+  s.""Entidad"",
+  s.""Tipo Crédito"",
+  SUM(CASE WHEN s.""Estado Cartera"" = 'Vencida' THEN s.""Monto Bs"" ELSE 0 END) AS ""cartera_vencida_bs"",
+  SUM(s.""Monto Bs"") AS ""cartera_total_bs""
+FROM ""S_BOASFI66_000728"" s
+WHERE s.""Año"" = (SELECT MAX(""Año"") FROM ""S_BOASFI66_000728"")
+  AND s.""Trimestre"" = 'IV'
+  AND s.""Entidad"" = 'BNA'
+  AND s.""Tipo Crédito"" = 'Crédito de Consumo'
+GROUP BY s.""Año"", s.""Entidad"", s.""Tipo Crédito"";"
+Necesito saber el costo de los fondos de las últimas 2 gestiones del Banco de Crédito,"SELECT ""Año"", AVG(""Indicador %"") AS ""Costo_Promedio_Fondos"" FROM ""SPIM_50013_IF"" WHERE ""Entidad Financiera"" = 'BCR' AND ""Indicador Nv2"" = ' Costo Promedio de Fondos' AND ""Mes"" = 'Diciembre' AND ""Año"" >= (SELECT MAX(""Año"") FROM ""SPIM_50013_IF"") - 1 GROUP BY ""Año"" ORDER BY ""Año"" ASC;",SPIM_50013_IF,"""Año"", ""Entidad Financiera"" = 'BCR',  ""Indicador Nv2"" = '   Costo Promedio de Fondos', ""Mes"" = 'Diciembre' , AND ""Año"" >= (SELECT MAX(""Año"") FROM ""SPIM_50013_IF"") - 1","""Indicador %""",AVG,"SELECT ""Año"", AVG(""Indicador %"") AS ""costo_promedio_fondos""
+FROM ""S_BOFINR44_00387""
+WHERE ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 2
+  AND ""Mes"" = 'diciembre'
+  AND ""Indicador Nv2"" = 'Costo Promedio de Fondos'
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", AVG(""Indicador %"") AS ""costo_fondos_promedio""
+FROM ""S_BOFINR44_00387""
+WHERE ""Indicador Nv2"" = 'Costo Promedio de Fondos'
+  AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 2
+  AND ""Mes"" = 'diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"";","SELECT ""Año"", AVG(""Indicador %"") AS ""costo_fondos_pct""
+FROM ""S_BOFINR44_00387""
+WHERE ""Indicador Nv2"" = 'Costo Promedio de Fondos'
+AND ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 2
+AND ""Mes"" = 'diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"";"
+Quiero saber cuánto del spread efectivo que tuvo el Banco de crédito en las 2 gestiones anteriores es usado para cubrir el costo de los fondos?,"SELECT ""Año"", AVG(""Indicador %"") AS ""Costo_Promedio_Fondos"" FROM ""SPIM_50013_IF"" WHERE ""Entidad Financiera"" = 'BCR' AND ""Indicador Nv2"" = ' Costo Promedio de Fondos' AND ""Mes"" = 'Diciembre' AND ""Año"" >= (SELECT MAX(""Año"") FROM ""SPIM_50013_IF"") - 1 GROUP BY ""Año"" ORDER BY ""Año"" ASC;",SPIM_50013_IF,"""Año"", ""Entidad Financiera"" = 'BCR',  ""Indicador Nv2"" = '   Costo Promedio de Fondos', ""Mes"" = 'Diciembre' , AND ""Año"" >= (SELECT MAX(""Año"") FROM ""SPIM_50013_IF"") - 1","""Indicador %""",AVG,"SELECT 
+    ""Año"", 
+    AVG(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END) / 
+    NULLIF(AVG(CASE WHEN ""Indicador Nv2"" = 'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END), 0) * 100 AS ""porcentaje_del_spread_usado_para_cubrir_costo_fondos"" 
+FROM 
+    ""S_BOFINR44_00387"" 
+WHERE 
+    ""Entidad Financiera"" = 'CRECER' AND 
+    ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 2 AND 
+    ""Mes"" = 'diciembre' AND 
+    ""Indicador Nv2"" IN ('Costo Promedio de Fondos', 'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO') 
+GROUP BY 
+    ""Año"" 
+ORDER BY 
+    ""Año"";","SELECT
+  ""Año"",
+  MAX(CASE WHEN ""Indicador Nv2"" = 'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END) AS ""spread_efectivo_pct"",
+  MAX(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END) AS ""costo_promedio_fondos_pct"",
+  CASE
+    WHEN MAX(CASE WHEN ""Indicador Nv2"" = 'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END) = 0 THEN NULL
+    ELSE MAX(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END)
+         / MAX(CASE WHEN ""Indicador Nv2"" = 'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END)
+  END AS ""proporcion_del_spread_usada_para_cubrir_costo_fondos"",
+  MAX(CASE WHEN ""Indicador Nv2"" = 'UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END) AS ""utilizacion_spread_efectivo_pct""
+FROM ""S_BOFINR44_00387""
+WHERE ""Entidad Financiera"" = 'BANCO DE CRÉDITO'
+  AND ""Indicador Nv2"" IN (
+    'CÁLCULO SPREAD EFECTIVO - SPREAD EFECTIVO',
+    'UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO',
+    'Costo Promedio de Fondos'
+  )
+  AND ""Año"" >= (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 1
+  AND ""Mes"" = 'Diciembre'
+GROUP BY ""Año""
+ORDER BY ""Año"" DESC;","SELECT 
+    ""Año"", 
+    MAX(CASE WHEN ""Indicador Nv2"" = 'UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END) AS ""spread_efectivo_pct"", 
+    MAX(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END) AS ""costo_fondos_pct"", 
+    CASE WHEN MAX(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END) = 0 THEN NULL 
+    ELSE MAX(CASE WHEN ""Indicador Nv2"" = 'UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO' THEN ""Indicador %"" END) / 
+    MAX(CASE WHEN ""Indicador Nv2"" = 'Costo Promedio de Fondos' THEN ""Indicador %"" END) END AS ""cobertura_spread_sobre_costo"" 
+FROM ""S_BOFINR44_00387"" 
+WHERE ""Año"" > (SELECT MAX(""Año"") FROM ""S_BOFINR44_00387"") - 2 
+AND ""Mes"" = 'diciembre' 
+AND ""Indicador Nv2"" IN ('UTILIZACIÓN DEL SPREAD EFECTIVO - SPREAD EFECTIVO', 'Costo Promedio de Fondos') 
+GROUP BY ""Año"" 
+ORDER BY ""Año"";"
