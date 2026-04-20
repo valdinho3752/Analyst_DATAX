@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import os
+import json
 from openai import OpenAI
 from fastmcp import FastMCP
 from qdrant_client import QdrantClient
@@ -189,7 +190,12 @@ def search_relevant_points(queries: list[str], limit_per_query: int = 15) -> dic
         limpios.sort(key=lambda x: (len(x["coincide_con_consultas"]), x["score_maximo"]), reverse=True)
             
         logger.info(f"✅ Encontrados {len(limpios)} puntos deduplicados en total.")
-        print(f"\n[MCP TOOL search_relevant_points] OUT: {len(limpios)} resultados encontrados\n", flush=True)
+        print(f"\n[MCP TOOL search_relevant_points] OUT: {len(limpios)} resultados encontrados:\n", flush=True)
+        try:
+            print(json.dumps(limpios, indent=2, ensure_ascii=False), flush=True)
+        except Exception:
+            print(limpios, flush=True)
+        print("\n", flush=True)
         return {"resultados": limpios}
 
     except Exception as e:
@@ -234,7 +240,12 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
             results.append(f"Columna '{columna}': Valor literal exacto '{valor}' (Score de similitud: {p.score:.3f})")
             
         logger.info(f"✅ Encontrados {len(results)} miembros sugeridos")
-        print(f"\n[MCP TOOL search_exact_members] OUT: {results}\n", flush=True)
+        print(f"\n[MCP TOOL search_exact_members] OUT: {len(results)} miembros sugeridos:\n", flush=True)
+        try:
+            print(json.dumps(results, indent=2, ensure_ascii=False), flush=True)
+        except Exception:
+            print(results, flush=True)
+        print("\n", flush=True)
         return results
 
     except Exception as e:
