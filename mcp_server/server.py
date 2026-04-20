@@ -6,6 +6,7 @@ from fastmcp import FastMCP
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from dotenv import load_dotenv
+from neo4j import GraphDatabase
 
 # Cargar variables de entorno del .env de la raíz
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
@@ -19,11 +20,19 @@ MODEL_NAME = "text-embedding-3-small"
 # URL de Qdrant (ajustada para el entorno local o Docker)
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 
+# Neo4j Configuración
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "testpassword")
+
 # --- Inicialización de OpenAI ---
 client_openai = OpenAI()
 
 # --- Inicialización de Qdrant ---
 qdrant_client = QdrantClient(url=QDRANT_URL)
+
+# --- Inicialización de Neo4j ---
+neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format="[%(levelname)s]: %(message)s", level=logging.INFO)
@@ -43,6 +52,7 @@ def get_table_schema(table_name: str) -> dict:
     """
     Busca en Qdrant el esquema técnico (payload) de una tabla específica.
     """
+    print(f"\n[MCP TOOL get_table_schema] IN: table_name='{table_name}'\n", flush=True)
     logger.info(f"--- 🔍 Buscando esquema para la tabla: {table_name} ---")
     
     try:
@@ -85,13 +95,16 @@ def get_table_schema(table_name: str) -> dict:
                     dim_data.pop("Miembros", None)
                     dim_data.pop("Valores ejemplo", None)
                     
+            print(f"\n[MCP TOOL get_table_schema] OUT: Esquema encontrado (truncado primeros 200 chars): {str(schema)[:200]}...\n", flush=True)
             return schema
         else:
             logger.warning(f"⚠️ No se encontró la tabla '{table_name}'")
+            print(f"\n[MCP TOOL get_table_schema] OUT: {{'error': 'Tabla no encontrada'}}\n", flush=True)
             return {"error": "Tabla no encontrada"}
 
     except Exception as e:
         logger.error(f"❌ Error al consultar Qdrant: {e}")
+        print(f"\n[MCP TOOL get_table_schema] ERROR: {e}\n", flush=True)
         return {"error": str(e)}
 
 
@@ -101,6 +114,7 @@ def search_relevant_points(queries: list[str], limit_per_query: int = 15) -> dic
     Busca puntos relevantes basadas en una lista de palabras/frases clave.
     Devuelve un diccionario de elementos deduplicados indicando por qué consultas hicieron match.
     """
+    print(f"\n[MCP TOOL search_relevant_points] IN: queries={queries}, limit={limit_per_query}\n", flush=True)
     logger.info(f"--- 🧠 Buscando puntos relevantes para {len(queries)} consultas ---")
 
     # Mecanismo de seguridad de Tokens
@@ -175,10 +189,12 @@ def search_relevant_points(queries: list[str], limit_per_query: int = 15) -> dic
         limpios.sort(key=lambda x: (len(x["coincide_con_consultas"]), x["score_maximo"]), reverse=True)
             
         logger.info(f"✅ Encontrados {len(limpios)} puntos deduplicados en total.")
+        print(f"\n[MCP TOOL search_relevant_points] OUT: {len(limpios)} resultados encontrados\n", flush=True)
         return {"resultados": limpios}
 
     except Exception as e:
         logger.error(f"❌ Error en búsqueda semántica (batch): {e}")
+        print(f"\n[MCP TOOL search_relevant_points] ERROR: {e}\n", flush=True)
         return {"error": str(e)}
 
 
@@ -188,6 +204,7 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
     Busca de forma semántica los valores/miembros categóricos exactos 
     para utilizar en una cláusula WHERE, basados en lenguaje natural.
     """
+    print(f"\n[MCP TOOL search_exact_members] IN: query='{query}', table_name='{table_name}', limit={limit}\n", flush=True)
     logger.info(f"--- 🔍 Buscando miembros en la tabla '{table_name}' para: '{query}' ---")
     try:
         query_vector = get_single_embedding(query)
@@ -217,11 +234,81 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
             results.append(f"Columna '{columna}': Valor literal exacto '{valor}' (Score de similitud: {p.score:.3f})")
             
         logger.info(f"✅ Encontrados {len(results)} miembros sugeridos")
+        print(f"\n[MCP TOOL search_exact_members] OUT: {results}\n", flush=True)
         return results
 
     except Exception as e:
         logger.error(f"❌ Error en búsqueda de miembros exactos: {e}")
+        print(f"\n[MCP TOOL search_exact_members] ERROR: {e}\n", flush=True)
         return [f"Error: {str(e)}"]
+
+
+@mcp.tool()
+def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
+    """
+    Valida semánticamente si una tabla contiene los conceptos clave solicitados
+    consultando el conocimiento estructurado en el Grafo (Neo4j).
+    """
+    print(f"\n[MCP TOOL validate_table_semantics] IN: table_name='{table_name}', keywords={keywords}\n", flush=True)
+    logger.info(f"--- 🧠 Validando tabla '{table_name}' en el Grafo para {len(keywords)} keywords ---")
+    
+    if not keywords:
+        print(f"\n[MCP TOOL validate_table_semantics] OUT: {{'error': 'Se requiere al menos un keyword para validar'}}\n", flush=True)
+        return {"error": "Se requiere al menos un keyword para validar"}
+
+    query = """
+    UNWIND $keywords AS keyword
+    MATCH (node)-[:BELONGS_TO*1..2]->(t:Table {name: $table_name})
+    WHERE (ANY(label IN labels(node) WHERE label IN ['Member', 'Dimension', 'Fact']))
+      AND node.name =~ ('(?i).*' + keyword + '.*')
+    OPTIONAL MATCH (node:Member)-[:BELONGS_TO]->(parentDim:Dimension)
+    RETURN keyword AS Busqueda, COALESCE(parentDim.name, labels(node)[0]) AS Dimension, node.name AS Coincidencia
+    """
+    
+    try:
+        records, _, _ = neo4j_driver.execute_query(
+            query,
+            keywords=keywords,
+            table_name=table_name,
+            database_="neo4j"
+        )
+        
+        resultado = {
+            "tabla_analizada": table_name,
+            "conceptos_solicitados": len(keywords),
+            "hallazgos": {}
+        }
+        
+        # Agrupar hallazgos
+        for r in records:
+            busqueda = r["Busqueda"]
+            dimension = r["Dimension"]
+            miembro = r["Coincidencia"]
+            
+            if busqueda not in resultado["hallazgos"]:
+                resultado["hallazgos"][busqueda] = []
+                
+            resultado["hallazgos"][busqueda].append(f"[{dimension}] -> '{miembro}'")
+            
+        resultado["conceptos_encontrados"] = len(resultado["hallazgos"])
+        
+        faltantes = [k for k in keywords if k not in resultado["hallazgos"]]
+        resultado["faltantes"] = faltantes
+        
+        if faltantes:
+            resultado["estatus"] = "INCUMPLE_FILTROS"
+            resultado["razon"] = f"Faltan {len(faltantes)} conceptos conceptuales en la estructura de esta tabla."
+        else:
+            resultado["estatus"] = "VALIDACION_EXITOSA"
+            
+        logger.info(f"✅ Validación Completada. Status: {resultado['estatus']}")
+        print(f"\n[MCP TOOL validate_table_semantics] OUT: {resultado}\n", flush=True)
+        return resultado
+        
+    except Exception as e:
+        logger.error(f"❌ Error al consultar Neo4j: {e}")
+        print(f"\n[MCP TOOL validate_table_semantics] ERROR: {e}\n", flush=True)
+        return {"error": str(e)}
 
 
 if __name__ == "__main__":

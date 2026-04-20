@@ -2,3 +2,4 @@ python-dotenv
 qdrant-client
 fastmcp
 openai
+neo4j

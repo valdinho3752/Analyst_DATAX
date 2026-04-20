@@ -17,12 +17,14 @@ class HostAgentExecutor(AgentExecutor):
     ) -> None:
         # 1. Obtener el texto del usuario
         user_input = get_message_text(context.message) if context.message else ""
+        print(f"\n[HOST AGENT] Recibido input:\n{user_input}\n", flush=True)
 
         # 2. Ejecutar el Agente Host (que usará sus herramientas internas si es necesario)
         result = await Runner.run(self.host_agent_wrapper.agent, user_input)
         
         # 3. Extraer y enviar la respuesta final textualmente
         output_text = result.final_output if isinstance(result.final_output, str) else str(result.final_output)
+        print(f"\n[HOST AGENT] Enviando output:\n{output_text}\n", flush=True)
             
         await event_queue.enqueue_event(new_agent_text_message(output_text))
 

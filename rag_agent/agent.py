@@ -25,6 +25,7 @@ class existing_Output(BaseModel):
     reasoning: str
     prompt_restructured: Optional[str] = None
     tables : Optional[List[str]] = None
+    keywords_for_graph: Optional[List[str]] = None
 
 class RagAgent:
     INSTRUCTIONS = ("""
@@ -55,11 +56,12 @@ class RagAgent:
         - NUNCA selecciones una tabla si su `tematica` o `fuente` no coincide con la naturaleza de la entidad financiera consultada, incluso si hay un miembro que hace "match" por similitud léxica.
         
         ## FORMATO DE RESPUESTA (JSON)
-        Responde ÚNICA Y EXCLUSIVAMENTE con este formato:
+        Responde ÚNICA Y EXCLUSIVAMENTE con este formato Pydantic:
         {
             "existing_info": boolean,
-            "reasoning": "Explicación de los hallazgos: 'Se identificó la tabla X para el tema Y. El hecho Z permite visualizar la métrica solicitada...'",
-            "tables": ["NOMBRE_TECNICO_DE_TABLA"]
+            "reasoning": "Explicación de los hallazgos...",
+            "tables": ["NOMBRE_TECNICO_DE_TABLA"],
+            "keywords_for_graph": ["BISA", "disponible", "activo"] // Lista de sustantivos base de negocio (Entidades, Cuentas, Rubros) extraídos de la pregunta. NO asumas nombres de columnas ni mandes cadenas completas. ESTRICTAMENTE PROHIBIDO incluir referencias temporales (años, meses, "últimos", "cierre") o lógicas. Extrae palabras puras (ej. "disponibilidades") para que el Grafo encuentre todas sus jerarquías.
         }
     """)
     def __init__(self):

@@ -21,6 +21,7 @@ class RagAgentExecutor(AgentExecutor):
     ) -> None:
         # 1. Obtener el texto que el usuario envió desde el contexto de A2A
         user_input = get_message_text(context.message) if context.message else ""
+        print(f"\n[RAG AGENT] Recibido input:\n{user_input}\n", flush=True)
 
         async with MCPServerManager(self.rag_agent_wrapper.mcp_servers) as server:
             result = await Runner.run(self.rag_agent_wrapper.agent, user_input)
@@ -28,6 +29,7 @@ class RagAgentExecutor(AgentExecutor):
         # 3. Extraer el resultado (que es de tipo existing_Output)
         # Pydantic te permite convertirlo a JSON fácilmente
         output_data = result.final_output.model_dump_json(indent=2)
+        print(f"\n[RAG AGENT] Enviando output:\n{output_data}\n", flush=True)
             
         # 4. Enviar el JSON de respuesta de vuelta a A2A
         await event_queue.enqueue_event(new_agent_text_message(output_data))

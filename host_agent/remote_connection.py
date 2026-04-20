@@ -38,5 +38,7 @@ class RemoteAgentConnection:
             params=MessageSendParams.model_validate(payload)
         )
         
+        print(f"\n[HOST_CONNECTION] Enviando a {self.agent_url}:\n{text}\n", flush=True)
         response: SendMessageResponse = await self.client.send_message(request)
+        print(f"\n[HOST_CONNECTION] Recibido de {self.agent_url}:\n{response.root.result}\n", flush=True)
         return response.root.result
