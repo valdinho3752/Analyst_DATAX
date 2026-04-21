@@ -350,13 +350,37 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
 
 if __name__ == "__main__":
     from ingest_openai import main as ingest_main
+    from ingest_neo4j import main as ingest_neo4j_main
     
+    # Verificación Qdrant
     try:
         qdrant_client.get_collection(COLLECTION_NAME)
-        logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada, saltando ingesta.")
+        logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada en Qdrant, saltando ingesta.")
     except Exception:
-        logger.info(f"⏳ Colección '{COLLECTION_NAME}' no existe. Iniciando ingesta en Qdrant por primera vez...")
-        ingest_main()
+        logger.info(f"⏳ Colección '{COLLECTION_NAME}' no existe en Qdrant. Iniciando ingesta...")
+        try:
+            ingest_main()
+        except Exception as e:
+            logger.error(f"❌ Error durante la ingesta en Qdrant: {e}")
+
+    # Verificación Neo4j
+    try:
+        records, _, _ = neo4j_driver.execute_query(
+            "MATCH (t:Table) RETURN count(t) AS count",
+            database_="neo4j"
+        )
+        count = records[0]["count"]
+        if count == 0:
+            logger.info("⏳ Grafo Neo4j vacío. Iniciando ingesta en Neo4j por primera vez...")
+            ingest_neo4j_main()
+        else:
+            logger.info(f"✅ Se encontraron {count} tablas en Neo4j, saltando ingesta.")
+    except Exception as e:
+        logger.warning(f"⚠️ No se pudo verificar Neo4j ({e}). Intentando ingesta por si acaso...")
+        try:
+            ingest_neo4j_main()
+        except Exception as e2:
+            logger.error(f"❌ Error crítico al intentar ingesta en Neo4j: {e2}")
 
     port = int(os.getenv("PORT", 8080))
     logger.info(f"🚀 MCP server started on port {port}")

@@ -1,5 +1,7 @@
 /qdrant_data
-/DB
+/DB/backup_db.sql
+/DB/backup_db.dump
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

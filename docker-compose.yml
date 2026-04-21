@@ -97,6 +97,8 @@ services:
     depends_on:
       qdrant_openai:
         condition: service_healthy
+      neo4j_graph:
+        condition: service_healthy
 
   db:
     container_name: postgres_rag_openai
@@ -110,7 +112,8 @@ services:
       - PGPASSWORD=${PASS_DB:-pass_rag}
     volumes:
       - postgres_data:/var/lib/postgresql
-      - ./DB:/docker-entrypoint-initdb.d
+      - ./DB/restore.sh:/docker-entrypoint-initdb.d/restore.sh
+      - ./DB/backup_db.dump:/tmp/backup_db.dump
     command: postgres -c max_wal_size=4GB
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${USER_DB:-user_rag} -d ${DATABASE_DB:-rag_db}" ]
@@ -163,7 +166,7 @@ services:
     volumes:
       - neo4j_data:/data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7474/"]
+      test: ["CMD-SHELL", "neo4j-admin server status || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 20
