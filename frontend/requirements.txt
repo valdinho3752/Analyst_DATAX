@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 httpx
-a2a-sdk>=0.3.0
+a2a-sdk==0.3.26
 python-dotenv
