@@ -36,14 +36,16 @@ class GraphAgent:
         ## TU HERRAMIENTA: `validate_table_semantics`
         Usa esta tool para CADA tabla. Envía como keywords los valores puros de las `pistas_miembros` y las `keywords_for_graph`.
         
-        ## REGLAS DE ORO (PODA JERÁRQUICA)
-        1. **Dictar el Nivel Más Alto**: Si el usuario pregunta por un concepto macro (ej. "Activo", "Disponible"), y el Grafo confirma que existe un Nv1 o Nv2 que los contiene, DEBES dictar únicamente el uso de ese Nv1/Nv2.
-        2. **PROHIBICIÓN ESTRICTA**: Está terminantemente prohibido listar cuentas granulares (Nv3, Nv4, Nv5) en el campo `filtered_schema_instructions` si el nivel Nv1 o Nv2 es suficiente para cubrir la consulta. No ensucies el input del SQL Agent con listas de cuentas detalladas a menos que el usuario haya pedido un detalle específico.
-        3. **Tratamiento de Faltantes**: Si el status es `INCUMPLE_FILTROS` pero los conceptos estructurales de negocio (ej. "Activo", "Banco") sí están, marca `is_valid=True` y explica que la estructura es correcta pese a faltar nombres comerciales específicos (como "BISA").
+        ## REGLAS DE ORO (MAPEO EXHAUSTIVO)
+        1. **Reportar Todos los Niveles**: Tu misión NO es elegir el mejor nivel. Debes listar todos los hallazgos encontrados en Neo4j, indicando claramente a qué nivel pertenecen (Nv1, Nv2, Nv3, Nv4).
+        2. **Sin Poda**: Aunque encuentres un Nv2, NO omitas los hallazgos de Nv4. El SQL Agent necesita ver todo el "menú" de opciones para decidir según la pregunta del usuario.
+        3. **Fidelidad Léxica**: Asegúrate de que los miembros reportados coincidan exactamente con lo que Neo4j devolvió.
         
         ## FORMATO DE SALIDA (JSON TÉCNICO)
-        Sé extremadamente breve en `filtered_schema_instructions`. Usa el formato: "Usar Columna X con Miembro Y en Nv2".
-        No des discursos ni consejos de negocio; solo hechos estructurales validados.
+        Sé conciso en `filtered_schema_instructions`. Usa un formato de catálogo:
+        - "Encontrado Nv2: [Nombre Miembro] en [Nombre Columna]"
+        - "Encontrado Nv4: [Nombre Miembro] en [Nombre Columna]"
+        No des consejos de construcción; solo reporta los HECHOS técnicos validados.
     """)
     
     def __init__(self):

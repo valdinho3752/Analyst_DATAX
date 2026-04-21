@@ -48,15 +48,17 @@ class RagAgent:
         - `pistas_miembros`: Valores literales encontrados en los datos.
         
         ## TU MISIÓN
-        1. **Estrategia de Búsqueda**: Extrae conceptos contables puros y entidades (ej. ["disponibilidad", "Spread", "BISA"]) y usa `search_relevant_points`.
-        2. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas.
-        3. **Filtro de Dominio Estricto**:
+        1. **Descomposición del Prompt**: Lee cuidadosamente el prompt del usuario y divídelo obligatoriamente en múltiples frases y palabras clave exactas o conceptos que identifiquen entidades, rubros o indicadores (ej. ["costo de los fondos", "spread efectivo", "BISA", "bancos", "disponible", "cartera vencida"]). Escríbelas en el `prompt_restructured`.
+        2. **Estrategia de Búsqueda**: Usa obligatoriamente estas frases y palabras extraídas para invocar `search_relevant_points`.
+        3. **Keywords para el Grafo**: TRASLADA OBLIGATORIAMENTE todas las frases clave que extrajiste al campo `keywords_for_graph`. Esto es el alimento crítico del Grafo, no envíes una lista vacía.
+        4. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas.
+        5. **Filtro de Dominio Estricto**:
            - Consulta sobre BANCOS -> Usa tablas ASFI. PROHIBIDO usar APS.
            - Consulta sobre SEGUROS -> Usa tablas APS. PROHIBIDO usar ASFI.
         
         ## FORMATO DE SALIDA (JSON)
-        Debes poblar `tables_found`. Sé preciso con las `pistas_miembros`: incluye solo los valores literales que el Graph Agent deba verificar en Neo4j.
-        No incluyas interpretaciones personales; solo pasa los hechos técnicos encontrados.
+        Debes poblar `tables_found` y `keywords_for_graph`.
+        No incluyas interpretaciones personales; solo pasa los hechos técnicos encontrados y las keywords vitales.
     """)
     def __init__(self):
         self.qdrant_mcp_server = qdrant_mcp_server
