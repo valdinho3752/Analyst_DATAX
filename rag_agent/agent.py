@@ -20,11 +20,17 @@ qdrant_mcp_server = MCPServerStreamableHttp(
     tool_filter={"include": ["search_relevant_points"]}
 )
 
+class TableFinding(BaseModel):
+    nombre_tecnico: str
+    justificacion_hallazgo: str
+    pistas_miembros: List[str]
+    columnas_detectadas: List[str]
+
 class existing_Output(BaseModel):
     existing_info: bool
     reasoning: str
     prompt_restructured: Optional[str] = None
-    tables : Optional[List[str]] = None
+    tables_found: Optional[List[TableFinding]] = None
     keywords_for_graph: Optional[List[str]] = None
 
 class RagAgent:
@@ -32,37 +38,25 @@ class RagAgent:
         # ROL: DATA SCOUT (EXPLORADOR DE METADATA)
         
         ## CONTEXTO
-        Tu rol es actuar como un "Data Scout". Tu objetivo es identificar qué tablas, dimensiones y hechos en la base de datos son relevantes para responder a la consulta del usuario.
+        Tu objetivo es identificar las tablas candidatas y términos clave para la consulta del usuario. Tu salida será enviada directamente al Graph Agent para validación.
         
-        ## TUS HERRAMIENTAS
-        Solo tienes acceso a `search_relevant_points`. Esta herramienta realiza una búsqueda semántica y te devuelve metadatos descriptivos de las tablas, sus columnas (dimensiones), miembros específicos de las dimensiones y sus métricas (hechos).
-        
-        ## REGLAS DE NEGOCIO PARA EL PAYLOAD
-        Recibirás información enriquecida según el tipo de registro:
-        1. **Tabla Maestra**: Recibes descripción general, temática y fuente. (No verás el esquema técnico completo aquí).
-        2. **Dimensión**: Recibes el nombre de la columna, la tabla a la que pertenece y su descripción funcional.
-        3. **Hecho**: Recibes el nombre de la métrica, tabla de origen, descripción detallada, unidades y reglas de agregación.
+        ## TU HERRAMIENTA: `search_relevant_points`
+        La herramienta devuelve un resumen de **TABLAS CONSOLIDADAS**.
+        Por cada tabla recibirás:
+        - `tabla`: Metadata (nombre técnico, descripción, temática, fuente).
+        - `columnas_halladas`: Lista de dimensiones que hicieron match semántico.
+        - `pistas_miembros`: Valores literales encontrados en los datos.
         
         ## TU MISIÓN
-        1. **Identificar**: NO envíes el párrafo completo del usuario a la herramienta de búsqueda. Tu trabajo es extraer y desglosar las métricas, dimensiones o palabras clave (ej. ["costo de los fondos", "spread efectivo"]) y enviar ese ARREGLO de consultas concretas a la herramienta `search_relevant_points`. Ella te devolverá los puntos deduplicados que respondieron a tus múltiples consultas.
-        2. **Analizar Hechos**: Si el usuario pide una métrica (ej. "Monto en Bs"), busca el hecho correspondiente y verifica sus `Avertencias` o `Dependencias`.
-        3. **Razonar**: Explica técnicamente por qué las tablas seleccionadas son las correctas. Menciona los hechos y dimensiones encontrados que justifican tu elección basándote en la intersección de tus resultados.
+        1. **Estrategia de Búsqueda**: Extrae conceptos contables puros y entidades (ej. ["disponibilidad", "Spread", "BISA"]) y usa `search_relevant_points`.
+        2. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas.
+        3. **Filtro de Dominio Estricto**:
+           - Consulta sobre BANCOS -> Usa tablas ASFI. PROHIBIDO usar APS.
+           - Consulta sobre SEGUROS -> Usa tablas APS. PROHIBIDO usar ASFI.
         
-        ## RESTRICCIONES
-        - NO intentes generar código SQL.
-        - Si no encuentras información relevante, indícalo claramente en el `reasoning`.
-        - **REGLA ESTRICTA DE DOMINIO (VITAL)**: Verifica SIEMPRE la industria de la consulta. Si el usuario pregunta por un "Banco", está ESTRICTAMENTE PROHIBIDO seleccionar tablas cuya "Fuente" o "Temática" (Tabla Maestra) pertenezca a Seguros/Aseguradoras (ej. APS). Debes elegir tablas de ASFI/Bancos.
-        - **REGLA ESTRICTA DE DOMINIO (VITAL)**: Si el usuario pregunta por una "Aseguradora" o "Seguros", está ESTRICTAMENTE PROHIBIDO seleccionar tablas de Bancos (ASFI). Debes elegir tablas de APS.
-        - NUNCA selecciones una tabla si su `tematica` o `fuente` no coincide con la naturaleza de la entidad financiera consultada, incluso si hay un miembro que hace "match" por similitud léxica.
-        
-        ## FORMATO DE RESPUESTA (JSON)
-        Responde ÚNICA Y EXCLUSIVAMENTE con este formato Pydantic:
-        {
-            "existing_info": boolean,
-            "reasoning": "Explicación de los hallazgos...",
-            "tables": ["NOMBRE_TECNICO_DE_TABLA"],
-            "keywords_for_graph": ["BISA", "disponible", "activo"] // Lista de sustantivos base de negocio (Entidades, Cuentas, Rubros) extraídos de la pregunta. NO asumas nombres de columnas ni mandes cadenas completas. ESTRICTAMENTE PROHIBIDO incluir referencias temporales (años, meses, "últimos", "cierre") o lógicas. Extrae palabras puras (ej. "disponibilidades") para que el Grafo encuentre todas sus jerarquías.
-        }
+        ## FORMATO DE SALIDA (JSON)
+        Debes poblar `tables_found`. Sé preciso con las `pistas_miembros`: incluye solo los valores literales que el Graph Agent deba verificar en Neo4j.
+        No incluyas interpretaciones personales; solo pasa los hechos técnicos encontrados.
     """)
     def __init__(self):
         self.qdrant_mcp_server = qdrant_mcp_server
