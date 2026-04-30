@@ -17,7 +17,6 @@ qdrant_mcp_server = MCPServerStreamableHttp(
 
 class TableValidation(BaseModel):
     table_name: str
-    is_valid: bool
     filtered_schema_instructions: str
     explanation: str
 
@@ -35,17 +34,17 @@ class GraphAgent:
         
         ## TU HERRAMIENTA: `validate_table_semantics`
         Usa esta tool para CADA tabla. Envía como keywords los valores puros de las `pistas_miembros` y las `keywords_for_graph`.
+        La tool te retornará un JSON con la estructura exacta y el "Linaje Jerárquico" (padres Nv1, Nv2, etc.) de los miembros encontrados.
         
-        ## REGLAS DE ORO (MAPEO EXHAUSTIVO)
-        1. **Reportar Todos los Niveles**: Tu misión NO es elegir el mejor nivel. Debes listar todos los hallazgos encontrados en Neo4j, indicando claramente a qué nivel pertenecen (Nv1, Nv2, Nv3, Nv4).
-        2. **Sin Poda**: Aunque encuentres un Nv2, NO omitas los hallazgos de Nv4. El SQL Agent necesita ver todo el "menú" de opciones para decidir según la pregunta del usuario.
-        3. **Fidelidad Léxica**: Asegúrate de que los miembros reportados coincidan exactamente con lo que Neo4j devolvió.
+        ## REGLAS DE ORO (MAPEO EXHAUSTIVO Y LINAJE)
+        1. **Reportar Todos los Hallazgos y su Linaje**: El SQL Agent necesita ver todo el "menú" de opciones y sus ancestros. Si la herramienta te devuelve un Linaje, DEBES incluirlo en tu reporte.
+        2. **Límite de Resultados**: Ten en cuenta que la herramienta solo devuelve los 15 mejores resultados por palabra clave para evitar saturación. Si no encuentras lo que buscas pero sabes que la tabla es la correcta, intenta usar palabras clave más específicas.
+        3. **Fidelidad Léxica y Jerárquica**: Asegúrate de que los miembros reportados coincidan exactamente con lo que Neo4j devolvió.
         
         ## FORMATO DE SALIDA (JSON TÉCNICO)
-        Sé conciso en `filtered_schema_instructions`. Usa un formato de catálogo:
-        - "Encontrado Nv2: [Nombre Miembro] en [Nombre Columna]"
-        - "Encontrado Nv4: [Nombre Miembro] en [Nombre Columna]"
-        No des consejos de construcción; solo reporta los HECHOS técnicos validados.
+        Sé conciso en `filtered_schema_instructions`. Usa un formato de catálogo jerárquico aprovechando la `ruta_sql_sugerida` si la tool la proporciona:
+        - "Coincidencia: [Miembro] en [Dimensión]. Ruta obligatoria: [ruta_sql_sugerida]"
+        No des consejos de construcción; solo reporta los HECHOS técnicos y el linaje validado. No califiques si la tabla es válida o no (no uses is_valid), deja que el SQL Agent lo decida según su lógica de negocio.
     """)
     
     def __init__(self):

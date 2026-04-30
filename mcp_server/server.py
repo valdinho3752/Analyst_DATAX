@@ -295,11 +295,39 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
 
     query = """
     UNWIND $keywords AS keyword
-    MATCH (node)-[:BELONGS_TO*1..2]->(t:Table {name: $table_name})
-    WHERE (ANY(label IN labels(node) WHERE label IN ['Member', 'Dimension', 'Fact']))
-      AND node.name =~ ('(?i).*' + keyword + '.*')
-    OPTIONAL MATCH (node:Member)-[:BELONGS_TO]->(parentDim:Dimension)
-    RETURN keyword AS Busqueda, COALESCE(parentDim.name, labels(node)[0]) AS Dimension, node.name AS Coincidencia
+    CALL {
+        WITH keyword
+        MATCH (node)-[:BELONGS_TO*1..2]->(t:Table {name: $table_name})
+        WHERE (ANY(label IN labels(node) WHERE label IN ['Member', 'Dimension', 'Fact']))
+          AND node.name =~ ('(?i).*' + keyword + '.*')
+        
+        WITH keyword, node,
+             CASE WHEN toLower(node.name) = toLower(keyword) THEN 0 ELSE 1 END AS exactMatch,
+             size(node.name) AS nameLen
+        ORDER BY exactMatch ASC, nameLen ASC
+        LIMIT 15
+        
+        OPTIONAL MATCH (node:Member)-[:BELONGS_TO]->(parentDim:Dimension)
+        OPTIONAL MATCH path = (node)-[:CHILD_OF*]->(root)
+        WHERE NOT (root)-[:CHILD_OF]->()
+        
+        RETURN keyword AS Busqueda, 
+               COALESCE(parentDim.name, labels(node)[0]) AS Dimension, 
+               node.name AS Coincidencia,
+               path,
+               parentDim,
+               node
+    }
+    RETURN Busqueda, Dimension, Coincidencia,
+           CASE WHEN path IS NOT NULL THEN
+              reverse([n IN nodes(path) | 
+                 [(n)-[:BELONGS_TO]->(d:Dimension) | "[" + d.name + "] -> '" + n.name + "'"][0]
+              ])
+           ELSE
+              CASE WHEN parentDim IS NOT NULL THEN
+                 ["[" + parentDim.name + "] -> '" + node.name + "'"]
+              ELSE [] END
+           END AS Lineage
     """
     
     try:
@@ -321,11 +349,28 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
             busqueda = r["Busqueda"]
             dimension = r["Dimension"]
             miembro = r["Coincidencia"]
+            linaje = r["Lineage"]
             
             if busqueda not in resultado["hallazgos"]:
                 resultado["hallazgos"][busqueda] = []
                 
-            resultado["hallazgos"][busqueda].append(f"[{dimension}] -> '{miembro}'")
+            ruta_sql_parts = []
+            for item in linaje:
+                try:
+                    dim_part, val_part = item.split("] -> '")
+                    dim = dim_part[1:]
+                    val = val_part[:-1]
+                    ruta_sql_parts.append(f"\"{dim}\" = '{val}'")
+                except:
+                    pass
+            ruta_sql = " AND ".join(ruta_sql_parts)
+                
+            resultado["hallazgos"][busqueda].append({
+                "dimension": dimension,
+                "coincidencia": miembro,
+                "linaje": linaje,
+                "ruta_sql_sugerida": ruta_sql
+            })
             
         resultado["conceptos_encontrados"] = len(resultado["hallazgos"])
         

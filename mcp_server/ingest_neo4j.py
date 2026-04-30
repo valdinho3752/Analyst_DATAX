@@ -11,7 +11,7 @@ NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "testpassword")
 
-INPUT_FILE = "metadata/chunks_demo3.json"
+INPUT_FILE = "metadata/chunks_demo4.json"
 
 class GraphIngestor:
     def __init__(self, uri, user, password):
@@ -109,6 +109,65 @@ class GraphIngestor:
                         dimension=payload.get("nombre_columna"),
                         value=str(payload.get("valor_miembro")))
 
+    def link_dimensions_hierarchy(self):
+        """Conecta dimensiones Nv(X) a Nv(X-1) dentro de la misma tabla."""
+        query_get = """
+        MATCH (d:Dimension)-[:BELONGS_TO]->(t:Table)
+        WHERE d.name =~ '(?i).*Nv[0-9]+.*'
+        RETURN t.name AS table, d.name AS dim_name
+        """
+        import re
+        links_to_create = []
+        with self.driver.session() as session:
+            records = session.run(query_get)
+            table_dims = {}
+            for r in records:
+                t = r["table"]
+                d = r["dim_name"]
+                match = re.search(r'(?i)Nv(\d+)', d)
+                if match:
+                    level = int(match.group(1))
+                    if t not in table_dims:
+                        table_dims[t] = []
+                    table_dims[t].append((level, d))
+            
+            for t, dims in table_dims.items():
+                dims.sort(key=lambda x: x[0])
+                for i in range(1, len(dims)):
+                    child_dim = dims[i][1]
+                    parent_dim = dims[i-1][1]
+                    links_to_create.append((t, child_dim, parent_dim))
+        
+        query_merge = """
+        MATCH (child:Dimension {name: $child, table: $table})
+        MATCH (parent:Dimension {name: $parent, table: $table})
+        MERGE (child)-[:CHILD_OF]->(parent)
+        """
+        with self.driver.session() as session:
+            for link in links_to_create:
+                session.run(query_merge, table=link[0], child=link[1], parent=link[2])
+        print(f"✅ Se crearon {len(links_to_create)} relaciones CHILD_OF entre Dimensiones.")
+
+    def link_members_hierarchy(self):
+        """Conecta miembros de niveles inferiores a superiores comparando prefijos numéricos."""
+        query = """
+        MATCH (childDim:Dimension)-[:CHILD_OF]->(parentDim:Dimension)
+        MATCH (childMember:Member)-[:BELONGS_TO]->(childDim)
+        MATCH (parentMember:Member)-[:BELONGS_TO]->(parentDim)
+        WHERE childMember.table = parentMember.table
+          AND childMember.name <> parentMember.name
+        WITH childMember, parentMember, split(parentMember.name, ' ')[0] AS parentCode
+        WHERE childMember.name STARTS WITH parentCode
+        WITH childMember, parentMember, size(parentCode) as prefLen
+        ORDER BY prefLen DESC
+        WITH childMember, collect(parentMember)[0] as bestParent
+        MERGE (childMember)-[:CHILD_OF]->(bestParent)
+        """
+        with self.driver.session() as session:
+            result = session.run(query)
+            counters = result.consume().counters
+            print(f"✅ Se crearon {counters.relationships_created} relaciones CHILD_OF entre Miembros.")
+
 
 def main():
     input_path = os.path.abspath(os.path.join(os.path.dirname(__file__), INPUT_FILE))
@@ -149,6 +208,11 @@ def main():
         p = c.get("payload", {})
         if p.get("tipo") == "miembro_dimension":
             ingestor.ingest_member(p)
+            
+    # 5. Generar Jerarquías Post-Ingesta
+    print("🔗 Generando relaciones jerárquicas (CHILD_OF)...")
+    ingestor.link_dimensions_hierarchy()
+    ingestor.link_members_hierarchy()
             
     print("✅ Ingesta en el Grafo finalizada exitosamente.")
     ingestor.close()

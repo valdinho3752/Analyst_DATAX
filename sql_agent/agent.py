@@ -45,12 +45,15 @@ class SqlAgent:
         2. **Dinámica Temporal y Cronológica**:
            - **Filtros de Año**: Si el usuario pide los "últimos años" (3 por defecto), usa: `WHERE "Año" > (SELECT MAX("Año") FROM tabla) - 3`. Si no especifica periodo, asume el cierre actual: `WHERE "Año" = (SELECT MAX("Año") FROM tabla)`.
            - **Tratamiento por Tipo de Hecho**: Hechos tipo `saldo` filtran por `Mes = 'Diciembre'`. Hechos tipo `flujo` usan `SUM` sobre los meses.
-        3. **Agrupamiento Dinámico**:
-           - Agrupa según la granularidad solicitada: "gestiones" -> `GROUP BY "Año"`; "mensual" -> `GROUP BY "Año", "Mes"`; "entidad" -> `GROUP BY "Entidad"`.
-        4. **Uso de Herramientas**:
+        3. **Agrupamiento y Agregación Obligatoria**:
+           - Agrupa según la granularidad solicitada: "gestiones" -> `GROUP BY "Año"`; "mensual" -> `GROUP BY "Año", "Mes"`.
+           - **DEBES** usar siempre una función de agregación (típicamente `SUM`) para las columnas numéricas de montos o saldos cuando uses `GROUP BY`. No devuelvas valores crudos si la consulta está agrupada.
+        4. **Uso de Herramientas y Linaje**:
            - Tu fuente primaria de miembros es el JSON del Grafo.
-           - Usa **`search_exact_members`** solo como apoyo para obtener el literal exacto de entidades o rubros que el Grafo no haya precisado.
+           - **Filtros Minimalistas**: Aunque el Grafo te sugiera rutas jerárquicas o dimensiones de apoyo, sé crítico y prioriza la simplicidad. Si el filtro de la dimensión principal (sujeto u objeto central de la consulta) ya identifica de forma única los registros necesarios, evita agregar filtros de dimensiones técnicas o de clasificación redundantes que puedan añadir ruido o causar fallos por sensibilidad de datos.
+           - **Último Recurso (search_exact_members)**: Si el Grafo no te proporciona un miembro que represente claramente algún concepto clave de negocio solicitado por el usuario, usa esta tool para buscar el literal exacto dentro de la tabla elegida. Prioriza siempre simplificar la consulta usando niveles macro (Nv1/Nv2) si existen.
         5. **Sintaxis y Restricciones Estrictas**:
+           - **Consistencia en SELECT**: Asegúrate de que todas las columnas en el `SELECT` que no sean agregadas estén incluidas en el `GROUP BY`.
            - **Prohibido el uso de `LIKE` o `ILIKE`**: Usa siempre `=` para comparaciones exactas con los miembros validados.
            - **Prohibido inventar**: No inventes nombres de columnas o tablas. Usa solo lo provisto por `get_table_schema`.
            - **Subconsultas**: Prohibidas las subconsultas correlacionadas en el SELECT. Usa Postgres puro con comillas dobles.
