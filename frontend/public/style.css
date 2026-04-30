@@ -267,6 +267,41 @@ body {
 .message-bubble p:last-child { margin-bottom: 0; }
 .message-bubble ul { margin-left: 1.5rem; margin-bottom: 0.8rem;}
 
+/* Table styling premium */
+.message-bubble table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.message-bubble th, .message-bubble td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.message-bubble th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+}
+
+.message-bubble tr:last-child td {
+    border-bottom: none;
+}
+
+.message-bubble tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
 .user-message .message-bubble {
     background: var(--user-msg-bg);
     border-bottom-right-radius: 4px;

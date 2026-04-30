@@ -22,6 +22,7 @@ class HostAgent:
     - **rag_agent**: Descubrimiento de tablas y miembros.
     - **graph_agent**: Validación de hechos y mapeo jerárquico multinivel (Nv1-Nv4).
     - **sql_agent**: Arquitecto SQL que decide la profundidad basándose en el prompt original.
+    - **sql_executor_agent**: Experto en ejecución que corre el SQL en Postgres y devuelve los datos.
 
     ## FLUJO DE TRABAJO (TRANSMISIÓN PURA)
     1. **DESCUBRIMIENTO**: Invoca al `rag_agent`. Pásale la consulta íntegra.
@@ -35,9 +36,15 @@ class HostAgent:
          (B) EL JSON DE VALIDACIÓN DEL GRAFO (íntegro).
        - **PROHIBIDO**: No interpretes ni resumas los resultados del Grafo. Envía los datos crudos para que el SQL Agent decida el nivel de detalle.
 
-    4. **RESPUESTA FINAL AL USUARIO**:
-       - Presentar el SQL y la justificación técnica.
-       - Añadir el resumen ejecutivo del SQL Agent.
+    4. **EJECUCIÓN**:
+       - Toma el bloque de código SQL generado por el `sql_agent` e invoca al `sql_executor_agent`.
+       - **IMPORTANTE**: Pásale el JSON ÍNTEGRO que recibiste del `sql_agent` (que incluye la lista de consultas y sus explicaciones). No intentes extraer el SQL tú mismo.
+
+    5. **RESPUESTA FINAL AL USUARIO**:
+       - **Consulta Generada**: Incluye siempre el bloque de código SQL íntegro que el `sql_agent` diseñó.
+       - **Justificación**: Añade la explicación técnica de por qué se eligieron esas tablas y filtros.
+       - **Resultados Ejecutados**: Muestra la tabla de datos (o el mensaje de éxito) que devolvió el `sql_executor_agent`.
+       - **Transparencia**: El usuario debe ver tanto la lógica técnica (SQL) como la respuesta de negocio (Datos).
     """
 
 
@@ -52,6 +59,10 @@ class HostAgent:
         
         sql_url = os.getenv("SQL_AGENT_URL", "http://sql_agent_openai:10001")
         self.sql_connection = RemoteAgentConnection(sql_url)
+
+        # Conexión al SQL Executor Agent (Nuevo)
+        executor_url = os.getenv("SQL_EXECUTOR_URL", "http://sql_executor_agent_openai:10004")
+        self.executor_connection = RemoteAgentConnection(executor_url)
         
         @function_tool
         async def verificar_existencia_datos(consulta: str) -> str:
@@ -90,9 +101,20 @@ class HostAgent:
             except Exception as e:
                 return f"Error al contactar al sql_agent: {str(e)}"
 
+        @function_tool
+        async def ejecutar_sql_en_db(sql: str) -> str:
+            """
+            Consulta al SqlExecutorAgent para ejecutar una consulta SQL y obtener los resultados de la base de datos.
+            """
+            try:
+                result = await self.executor_connection.send_message(sql)
+                return str(result)
+            except Exception as e:
+                return f"Error al contactar al sql_executor_agent: {str(e)}"
+
         self.agent = Agent(
             name="Host Agent",
             instructions=self.INSTRUCTIONS,
-            tools=[verificar_existencia_datos, validar_datos_grafo, generar_consultas_sql],
+            tools=[verificar_existencia_datos, validar_datos_grafo, generar_consultas_sql, ejecutar_sql_en_db],
             model="gpt-4o"
         )

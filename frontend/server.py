@@ -39,7 +39,7 @@ async def chat_endpoint(request: Request):
     logger.info(f"Received query from UI: {query}")
     
     try:
-        async with httpx.AsyncClient(timeout=120.0) as httpx_client:
+        async with httpx.AsyncClient(timeout=300.0) as httpx_client:
             resolver = A2ACardResolver(httpx_client, AGENT_URL)
             card = await resolver.get_agent_card()
             

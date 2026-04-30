@@ -68,6 +68,29 @@ services:
       - rag_agent_openai
       - sql_agent_openai
       - graph_agent_openai
+      - sql_executor_agent_openai
+    command: [ "python", "__main__.py" ]
+
+  sql_executor_agent_openai:
+    build:
+      context: ./sql_executor_agent
+      dockerfile: Dockerfile
+    container_name: sql_executor_agent_openai
+    env_file: .env
+    ports:
+      - "10004:10004"
+    volumes:
+      - ./sql_executor_agent:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HOST_DB=db
+      - USER_DB=${USER_DB:-user_rag}
+      - PASS_DB=${PASS_DB:-pass_rag}
+      - DATABASE_DB=${DATABASE_DB:-rag_db}
+      - PORT_DB=5432
+    depends_on:
+      db:
+        condition: service_healthy
     command: [ "python", "__main__.py" ]
 
   mcp_server_openai:

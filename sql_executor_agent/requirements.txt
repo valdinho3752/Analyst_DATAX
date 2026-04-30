@@ -1,0 +1,10 @@
+asyncpg
+pandas
+pydantic
+python-dotenv
+httpx
+uvicorn
+fastapi
+a2a-sdk[http-server]==0.3.26
+openai-agents
+tabulate
