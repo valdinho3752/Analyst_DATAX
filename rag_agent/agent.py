@@ -31,7 +31,6 @@ class existing_Output(BaseModel):
     reasoning: str
     prompt_restructured: Optional[str] = None
     tables_found: Optional[List[TableFinding]] = None
-    keywords_for_graph: Optional[List[str]] = None
 
 class RagAgent:
     INSTRUCTIONS = ("""
@@ -48,17 +47,13 @@ class RagAgent:
         - `pistas_miembros`: Valores literales encontrados en los datos.
         
         ## TU MISIÓN
-        1. **Descomposición del Prompt**: Lee cuidadosamente el prompt del usuario y divídelo obligatoriamente en múltiples frases y palabras clave exactas o conceptos que identifiquen entidades, rubros o indicadores (ej. ["costo de los fondos", "spread efectivo", "BISA", "bancos", "disponible", "cartera vencida"]). Escríbelas en el `prompt_restructured`.
+        1. **Descomposición del Prompt**: Lee cuidadosamente el prompt del usuario y divídelo obligatoriamente en múltiples frases, conceptos y **palabras clave atómicas**. Debes incluir tanto la **frase completa** como sus **componentes individuales** más significativos para maximizar el match semántico (ej. si el usuario busca "activo disponible", incluye ["activo disponible", "activo", "disponible"]). Escríbelas en el `prompt_restructured`.
         2. **Estrategia de Búsqueda**: Usa obligatoriamente estas frases y palabras extraídas para invocar `search_relevant_points`.
-        3. **Keywords para el Grafo**: TRASLADA OBLIGATORIAMENTE todas las frases clave que extrajiste al campo `keywords_for_graph`. Esto es el alimento crítico del Grafo, no envíes una lista vacía.
-        4. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas.
-        5. **Filtro de Dominio Estricto**:
-           - Consulta sobre BANCOS -> Usa tablas ASFI. PROHIBIDO usar APS.
-           - Consulta sobre SEGUROS -> Usa tablas APS. PROHIBIDO usar ASFI.
+        3. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas basándote en los hallazgos. Asegúrate de que las `pistas_miembros` capturadas sean precisas, ya que el Graph Agent las usará para validar la estructura.
         
         ## FORMATO DE SALIDA (JSON)
-        Debes poblar `tables_found` y `keywords_for_graph`.
-        No incluyas interpretaciones personales; solo pasa los hechos técnicos encontrados y las keywords vitales.
+        Debes poblar `tables_found`.
+        No incluyas interpretaciones personales; solo pasa los hechos técnicos encontrados y las pistas de miembros vitales.
     """)
     def __init__(self):
         self.qdrant_mcp_server = qdrant_mcp_server

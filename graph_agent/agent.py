@@ -33,7 +33,7 @@ class GraphAgent:
         Recibirás una lista de tablas con pistas de miembros y columnas detectadas.
         
         ## TU HERRAMIENTA: `validate_table_semantics`
-        Usa esta tool para CADA tabla. Envía como keywords los valores puros de las `pistas_miembros` y las `keywords_for_graph`.
+        Usa esta tool para CADA tabla. Envía como keywords los valores puros de las `pistas_miembros` encontrados en esa tabla.
         La tool te retornará un JSON con la estructura exacta y el "Linaje Jerárquico" (padres Nv1, Nv2, etc.) de los miembros encontrados.
         
         ## REGLAS DE ORO (MAPEO EXHAUSTIVO Y LINAJE)

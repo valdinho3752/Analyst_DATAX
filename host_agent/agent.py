@@ -81,7 +81,7 @@ class HostAgent:
         @function_tool
         async def validar_datos_grafo(contexto_rag: str) -> str:
             """
-            Consulta al Data Validator (graph_agent) pasándole las tablas candidatas y keywords del RAG 
+            Consulta al Data Validator (graph_agent) pasándole las tablas candidatas del RAG 
             para verificar la jerarquía exacta y descartar alucinaciones usando el Knowledge Graph.
             """
             try:

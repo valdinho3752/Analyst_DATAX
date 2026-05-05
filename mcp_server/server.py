@@ -165,29 +165,47 @@ def search_relevant_points(queries: list[str]) -> dict:
 
         # 2. Búsqueda por estratos
         for q_vector in query_vectors:
-            # Estrato A: Tablas Maestras (Contexto Macro)
+            # Estrato A: Tablas Maestras (Contexto Macro - Global)
             res_tables = qdrant_client.query_points(
-                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=3,
+                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=5,
                 query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="tabla_maestra"))])
             ).points
             for p in res_tables:
                 add_to_consolidated(p.payload.get("nombre_tabla"), "tabla_maestra", p.payload, p.score)
 
-            # Estrato B: Dimensiones (Contexto de Esquema)
-            res_dims = qdrant_client.query_points(
-                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=5,
+            # Estrato B: Dimensiones AGRUPADAS por tabla
+            # Esto descubre qué tablas tienen columnas relevantes y trae las mejores de cada una
+            res_dims_groups = qdrant_client.query_points_groups(
+                collection_name=COLLECTION_NAME,
+                query=q_vector,
+                group_by="tabla_origen",
+                limit=6,        # Top 6 tablas por dimensiones
+                group_size=5,   # 5 dimensiones por tabla
+                using=VECTOR_NAME,
                 query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="dimension"))])
-            ).points
-            for p in res_dims:
-                add_to_consolidated(p.payload.get("tabla_origen"), "dimension", p.payload, p.score)
+            ).groups
+            
+            for group in res_dims_groups:
+                t_name = group.id
+                for hit in group.hits:
+                    add_to_consolidated(t_name, "dimension", hit.payload, hit.score)
 
-            # Estrato C: Miembros (Contexto de Datos/Filtros)
-            res_members = qdrant_client.query_points(
-                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=10,
+            # Estrato C: Miembros AGRUPADOS por tabla
+            # Esto asegura que los miembros técnicos de cada tabla salgan en el top
+            res_members_groups = qdrant_client.query_points_groups(
+                collection_name=COLLECTION_NAME,
+                query=q_vector,
+                group_by="tabla_origen",
+                limit=6,        # Top 6 tablas por miembros
+                group_size=30,  # 30 miembros por tabla para capturar códigos técnicos
+                using=VECTOR_NAME,
                 query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="miembro_dimension"))])
-            ).points
-            for p in res_members:
-                add_to_consolidated(p.payload.get("tabla_origen"), "miembro_dimension", p.payload, p.score)
+            ).groups
+
+            for group in res_members_groups:
+                t_name = group.id
+                for hit in group.hits:
+                    add_to_consolidated(t_name, "miembro_dimension", hit.payload, hit.score)
 
         # 3. Formatear para salida final (Convertir sets a listas)
         final_results = []
@@ -399,8 +417,12 @@ if __name__ == "__main__":
     
     # Verificación Qdrant
     try:
-        qdrant_client.get_collection(COLLECTION_NAME)
-        logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada en Qdrant, saltando ingesta.")
+        collection_info = qdrant_client.get_collection(COLLECTION_NAME)
+        if collection_info.points_count == 0:
+            logger.info(f"⏳ Colección '{COLLECTION_NAME}' vacía en Qdrant. Iniciando ingesta...")
+            ingest_main()
+        else:
+            logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada con {collection_info.points_count} puntos, saltando ingesta.")
     except Exception:
         logger.info(f"⏳ Colección '{COLLECTION_NAME}' no existe en Qdrant. Iniciando ingesta...")
         try:
