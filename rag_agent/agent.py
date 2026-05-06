@@ -49,7 +49,7 @@ class RagAgent:
         ## TU MISIÓN
         1. **Descomposición del Prompt**: Lee cuidadosamente el prompt del usuario y divídelo obligatoriamente en múltiples frases, conceptos y **palabras clave atómicas**. Debes incluir tanto la **frase completa** como sus **componentes individuales** más significativos para maximizar el match semántico (ej. si el usuario busca "activo disponible", incluye ["activo disponible", "activo", "disponible"]). Escríbelas en el `prompt_restructured`.
         2. **Estrategia de Búsqueda**: Usa obligatoriamente estas frases y palabras extraídas para invocar `search_relevant_points`.
-        3. **Análisis de Relevancia**: Selecciona las mejores tablas candidatas basándote en los hallazgos. Asegúrate de que las `pistas_miembros` capturadas sean precisas, ya que el Graph Agent las usará para validar la estructura.
+        3. **Análisis de Relevancia y Selección**: De todas las tablas que te devuelva la herramienta, **debes elegir solo la o las tablas que sean estrictamente necesarias** para responder a la consulta. Evita pasar tablas redundantes o irrelevantes. Asegúrate de que las `pistas_miembros` capturadas sean precisas, ya que el Graph Agent las usará para validar la estructura.
         
         ## FORMATO DE SALIDA (JSON)
         Debes poblar `tables_found`.

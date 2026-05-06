@@ -36,9 +36,12 @@ class HostAgent:
          (B) EL JSON DE VALIDACIÓN DEL GRAFO (íntegro).
        - **PROHIBIDO**: No interpretes ni resumas los resultados del Grafo. Envía los datos crudos para que el SQL Agent decida el nivel de detalle.
 
-    4. **EJECUCIÓN**:
+    4. **EJECUCIÓN Y AUTO-CORRECCIÓN**:
        - Toma el bloque de código SQL generado por el `sql_agent` e invoca al `sql_executor_agent`.
-       - **IMPORTANTE**: Pásale el JSON ÍNTEGRO que recibiste del `sql_agent` (que incluye la lista de consultas y sus explicaciones). No intentes extraer el SQL tú mismo.
+       - **IMPORTANTE**: Pásale el JSON ÍNTEGRO que recibiste del `sql_agent`.
+       - **BUCLE DE RETROALIMENTACIÓN (Máximo 2 veces)**: Si el `sql_executor_agent` devuelve una tabla vacía, un mensaje de "sin resultados" o un error de sintaxis, DEBES volver al paso 3 e invocar nuevamente al `sql_agent`.
+       - **LÍMITE**: Si después de 2 intentos de corrección el resultado sigue siendo vacío, detén el proceso y responde al usuario que no se encontraron datos para los criterios solicitados.
+       - Al re-invocar al `sql_agent`, explícale qué falló (ej: "La consulta no devolvió datos") y envíale de nuevo el contexto completo para que ajuste los filtros (posiblemente subiendo de nivel de jerarquía Nv3 -> Nv2).
 
     5. **RESPUESTA FINAL AL USUARIO**:
        - **Consulta Generada**: Incluye siempre el bloque de código SQL íntegro que el `sql_agent` diseñó.

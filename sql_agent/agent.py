@@ -57,6 +57,10 @@ class SqlAgent:
            - **Prohibido el uso de `LIKE` o `ILIKE`**: Usa siempre `=` para comparaciones exactas con los miembros validados.
            - **Prohibido inventar**: No inventes nombres de columnas o tablas. Usa solo lo provisto por `get_table_schema`.
            - **Subconsultas**: Prohibidas las subconsultas correlacionadas en el SELECT. Usa Postgres puro con comillas dobles.
+        6. **MANEJO DE RETROALIMENTACIÓN (RE-INTENTOS)**:
+           - Si recibes un mensaje indicando que la consulta anterior no devolvió resultados o tuvo un error, analiza la causa.
+           - Si el resultado fue vacío, es probable que tus filtros fueran muy específicos. Intenta "subir de nivel" en la jerarquía (ej. de Nv4 a Nv3 o de Nv3 a Nv2) para obtener datos más agregados que sí existan en la DB.
+           - Explica en `query_explanation` qué cambios realizaste para corregir el problema.
         
         ## FORMATO DE SALIDA (JSON)
         Genera el SQL y una explicación técnica que justifique la elección del nivel de jerarquía y los filtros aplicados.
