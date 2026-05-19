@@ -4,10 +4,10 @@ import os
 import json
 from openai import OpenAI
 from fastmcp import FastMCP
-from qdrant_client import QdrantClient
+from qdrant_client import AsyncQdrantClient
 from qdrant_client.http import models
 from dotenv import load_dotenv
-from neo4j import GraphDatabase
+from neo4j import GraphDatabase, AsyncGraphDatabase
 
 # Cargar variables de entorno del .env de la raíz
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
@@ -30,10 +30,10 @@ NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "testpassword")
 client_openai = OpenAI()
 
 # --- Inicialización de Qdrant ---
-qdrant_client = QdrantClient(url=QDRANT_URL)
+qdrant_client = AsyncQdrantClient(url=QDRANT_URL)
 
 # --- Inicialización de Neo4j ---
-neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+neo4j_driver = AsyncGraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format="[%(levelname)s]: %(message)s", level=logging.INFO)
@@ -49,7 +49,7 @@ def get_single_embedding(text: str):
     return response.data[0].embedding
 
 @mcp.tool()
-def get_table_schema(table_name: str) -> dict:
+async def get_table_schema(table_name: str) -> dict:
     """
     Busca en Qdrant el esquema técnico (payload) de una tabla específica.
     """
@@ -58,7 +58,7 @@ def get_table_schema(table_name: str) -> dict:
     
     try:
         # El método scroll devuelve una tupla (List[Record], Optional[Offset])
-        records, next_page_offset = qdrant_client.scroll(
+        records, next_page_offset = await qdrant_client.scroll(
             collection_name=COLLECTION_NAME,
             scroll_filter=models.Filter(
                 must=[
@@ -110,7 +110,7 @@ def get_table_schema(table_name: str) -> dict:
 
 
 @mcp.tool()
-def search_relevant_points(queries: list[str]) -> dict:
+async def search_relevant_points(queries: list[str]) -> dict:
     """
     Busca puntos relevantes basadas en una lista de palabras/frases clave.
     Realiza una búsqueda estratificada (Tablas, Dimensiones y Miembros) para garantizar diversidad.
@@ -140,18 +140,20 @@ def search_relevant_points(queries: list[str]) -> dict:
                     "metadata": {},
                     "columnas_relevantes": set(),
                     "pistas_de_miembros": set(),
-                    "score_max": 0.0
+                    "score_max": 0.0,
+                    "hit_count": 0
                 }
             
             consolidated[table_name]["score_max"] = max(consolidated[table_name]["score_max"], score)
+            consolidated[table_name]["hit_count"] += 1
             
             if tipo == "tabla_maestra":
                 # Guardar metadata básica de la tabla
                 consolidated[table_name]["metadata"] = {
                     "nombre": data.get("nombre_tabla"),
                     "descripcion": data.get("Descripcion tabla"),
-                    "tematica": data.get("tematica"),
-                    "fuente": data.get("fuente")
+                    "tematica": data.get("Tematica", data.get("tematica")),
+                    "fuente": data.get("Fuente", data.get("fuente"))
                 }
             elif tipo == "dimension":
                 col = data.get("nombre_columna")
@@ -163,69 +165,114 @@ def search_relevant_points(queries: list[str]) -> dict:
                 if val:
                     consolidated[table_name]["pistas_de_miembros"].add(val)
 
-        # 2. Búsqueda por estratos
-        for q_vector in query_vectors:
-            # Estrato A: Tablas Maestras (Contexto Macro - Global)
-            res_tables = qdrant_client.query_points(
-                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=5,
+        # 2. Búsqueda por estratos (PARALELIZADA)
+        async def fetch_strata(q_vector):
+            # Estrato A: Tablas Maestras
+            task_tables = qdrant_client.query_points(
+                collection_name=COLLECTION_NAME, query=q_vector, using=VECTOR_NAME, limit=15,
                 query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="tabla_maestra"))])
-            ).points
-            for p in res_tables:
-                add_to_consolidated(p.payload.get("nombre_tabla"), "tabla_maestra", p.payload, p.score)
-
-            # Estrato B: Dimensiones AGRUPADAS por tabla
-            # Esto descubre qué tablas tienen columnas relevantes y trae las mejores de cada una
-            res_dims_groups = qdrant_client.query_points_groups(
+            )
+            
+            # Estrato B: Dimensiones AGRUPADAS
+            task_dims = qdrant_client.query_points_groups(
                 collection_name=COLLECTION_NAME,
                 query=q_vector,
                 group_by="tabla_origen",
-                limit=6,        # Top 6 tablas por dimensiones
-                group_size=5,   # 5 dimensiones por tabla
+                limit=15,
+                group_size=5,
                 using=VECTOR_NAME,
                 query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="dimension"))])
-            ).groups
+            )
             
-            for group in res_dims_groups:
+            # Estrato C: Miembros AGRUPADOS
+            task_members = qdrant_client.query_points_groups(
+                collection_name=COLLECTION_NAME,
+                query=q_vector,
+                group_by="tabla_origen",
+                limit=30,
+                group_size=30,
+                using=VECTOR_NAME,
+                query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="miembro_dimension"))])
+            )
+            
+            return await asyncio.gather(task_tables, task_dims, task_members)
+
+        # Lanzar todas las búsquedas en paralelo para todos los vectores
+        all_search_tasks = [fetch_strata(v) for v in query_vectors]
+        all_results = await asyncio.gather(*all_search_tasks)
+
+        # Procesar los resultados consolidados
+        for res_tables, res_dims_groups, res_members_groups in all_results:
+            # Procesar Tablas
+            for p in res_tables.points:
+                add_to_consolidated(p.payload.get("nombre_tabla"), "tabla_maestra", p.payload, p.score)
+
+            # Procesar Dimensiones
+            for group in res_dims_groups.groups:
                 t_name = group.id
                 for hit in group.hits:
                     add_to_consolidated(t_name, "dimension", hit.payload, hit.score)
 
-            # Estrato C: Miembros AGRUPADOS por tabla
-            # Esto asegura que los miembros técnicos de cada tabla salgan en el top
-            res_members_groups = qdrant_client.query_points_groups(
-                collection_name=COLLECTION_NAME,
-                query=q_vector,
-                group_by="tabla_origen",
-                limit=6,        # Top 6 tablas por miembros
-                group_size=30,  # 30 miembros por tabla para capturar códigos técnicos
-                using=VECTOR_NAME,
-                query_filter=models.Filter(must=[models.FieldCondition(key="tipo", match=models.MatchValue(value="miembro_dimension"))])
-            ).groups
-
-            for group in res_members_groups:
+            # Procesar Miembros
+            for group in res_members_groups.groups:
                 t_name = group.id
                 for hit in group.hits:
                     add_to_consolidated(t_name, "miembro_dimension", hit.payload, hit.score)
 
+        # Recuperar metadata faltante para las tablas que solo coincidieron por dimensiones/miembros
+        tablas_sin_metadata = [t_name for t_name, info in consolidated.items() if not info["metadata"]]
+        if tablas_sin_metadata:
+            try:
+                records_faltantes, _ = await qdrant_client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    scroll_filter=models.Filter(
+                        must=[
+                            models.FieldCondition(
+                                key="tipo",
+                                match=models.MatchValue(value="tabla_maestra")
+                            ),
+                            models.FieldCondition(
+                                key="nombre_tabla",
+                                match=models.MatchAny(any=tablas_sin_metadata)
+                            )
+                        ]
+                    ),
+                    limit=len(tablas_sin_metadata)
+                )
+                for p in records_faltantes:
+                    t_name = p.payload.get("nombre_tabla")
+                    if t_name in consolidated:
+                        consolidated[t_name]["metadata"] = {
+                            "nombre": t_name,
+                            "descripcion": p.payload.get("Descripcion tabla"),
+                            "tematica": p.payload.get("Tematica", p.payload.get("tematica")),
+                            "fuente": p.payload.get("Fuente", p.payload.get("fuente"))
+                        }
+            except Exception as e:
+                logger.warning(f"⚠️ No se pudo recuperar metadata faltante: {e}")
+
         # 3. Formatear para salida final (Convertir sets a listas)
         final_results = []
         for t_name, info in consolidated.items():
-            # Si no encontramos metadata de tabla maestra, al menos ponemos el nombre
+            # Si aún no encontramos metadata de tabla maestra, al menos ponemos el nombre
             if not info["metadata"]:
                 info["metadata"] = {"nombre": t_name, "descripcion": "Sin descripción detallada"}
+            
+            # Score Final: score máximo + bono de 0.05 por cada coincidencia adicional
+            score_final = info["score_max"] + (max(0, info["hit_count"] - 1) * 0.05)
             
             final_results.append({
                 "tabla": info["metadata"],
                 "columnas_halladas": list(info["columnas_relevantes"]),
                 "pistas_miembros": list(info["pistas_de_miembros"]),
-                "relevancia_score": round(info["score_max"], 3)
+                "relevancia_score": round(score_final, 3)
             })
 
         # Ordenar por score de relevancia
         final_results.sort(key=lambda x: x["relevancia_score"], reverse=True)
         
-        # Limitar a las 6 tablas más prometedoras para ahorrar tokens
-        final_results = final_results[:6]
+        # Limitar a las 10 tablas más prometedoras para ahorrar tokens (Aumentado de 6 a 10)
+        final_results = final_results[:10]
 
         logger.info(f"✅ Búsqueda finalizada. Consolidado en {len(final_results)} tablas.")
         print(f"\n[MCP TOOL search_relevant_points] OUT: {len(final_results)} tablas consolidadas:\n", flush=True)
@@ -249,7 +296,7 @@ def search_relevant_points(queries: list[str]) -> dict:
 
 
 @mcp.tool()
-def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[str]:
+async def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[str]:
     """
     Busca de forma semántica los valores/miembros categóricos exactos 
     para utilizar en una cláusula WHERE, basados en lenguaje natural.
@@ -258,7 +305,7 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
     logger.info(f"--- 🔍 Buscando miembros en la tabla '{table_name}' para: '{query}' ---")
     try:
         query_vector = get_single_embedding(query)
-        points = qdrant_client.query_points(
+        res = await qdrant_client.query_points(
             collection_name=COLLECTION_NAME,
             query=query_vector,
             using=VECTOR_NAME,
@@ -275,7 +322,8 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
                     )
                 ]
             )
-        ).points
+        )
+        points = res.points
         
         results = []
         for p in points:
@@ -299,7 +347,7 @@ def search_exact_members(query: str, table_name: str, limit: int = 25) -> list[s
 
 
 @mcp.tool()
-def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
+async def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
     """
     Valida semánticamente si una tabla contiene los conceptos clave solicitados
     consultando el conocimiento estructurado en el Grafo (Neo4j).
@@ -329,12 +377,17 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
         OPTIONAL MATCH path = (node)-[:CHILD_OF*]->(root)
         WHERE NOT (root)-[:CHILD_OF]->()
         
+        OPTIONAL MATCH (child:Member)-[:CHILD_OF*1..3]->(node)
+        OPTIONAL MATCH (child)-[:BELONGS_TO]->(childDim:Dimension)
+        
         RETURN keyword AS Busqueda, 
                COALESCE(parentDim.name, labels(node)[0]) AS Dimension, 
                node.name AS Coincidencia,
                path,
                parentDim,
-               node
+               node,
+               collect(DISTINCT childDim.name) AS childDimensions,
+               collect(DISTINCT child.name)[0..20] AS sampleChildren
     }
     RETURN Busqueda, Dimension, Coincidencia,
            CASE WHEN path IS NOT NULL THEN
@@ -345,16 +398,19 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
               CASE WHEN parentDim IS NOT NULL THEN
                  ["[" + parentDim.name + "] -> '" + node.name + "'"]
               ELSE [] END
-           END AS Lineage
+           END AS Lineage,
+           childDimensions AS DimensionesHijas,
+           sampleChildren AS MiembrosHijos
     """
     
     try:
-        records, _, _ = neo4j_driver.execute_query(
-            query,
-            keywords=keywords,
-            table_name=table_name,
-            database_="neo4j"
-        )
+        async with neo4j_driver.session(database="neo4j") as session:
+            result = await session.run(
+                query,
+                keywords=keywords,
+                table_name=table_name
+            )
+            records = await result.data()
         
         resultado = {
             "tabla_analizada": table_name,
@@ -383,12 +439,24 @@ def validate_table_semantics(table_name: str, keywords: list[str]) -> dict:
                     pass
             ruta_sql = " AND ".join(ruta_sql_parts)
                 
-            resultado["hallazgos"][busqueda].append({
+            hallazgo = {
                 "dimension": dimension,
                 "coincidencia": miembro,
                 "linaje": linaje,
                 "ruta_sql_sugerida": ruta_sql
-            })
+            }
+            
+            if r.get("DimensionesHijas"):
+                hijas_limpias = [d for d in r["DimensionesHijas"] if d]
+                if hijas_limpias:
+                    hallazgo["dimensiones_de_desglose"] = hijas_limpias
+                    
+            if r.get("MiembrosHijos"):
+                miembros_limpios = [m for m in r["MiembrosHijos"] if m]
+                if miembros_limpios:
+                    hallazgo["ejemplos_subniveles"] = miembros_limpios
+                    
+            resultado["hallazgos"][busqueda].append(hallazgo)
             
         resultado["conceptos_encontrados"] = len(resultado["hallazgos"])
         
@@ -416,45 +484,50 @@ if __name__ == "__main__":
     from ingest_neo4j import main as ingest_neo4j_main
     
     # Verificación Qdrant
-    try:
-        collection_info = qdrant_client.get_collection(COLLECTION_NAME)
-        if collection_info.points_count == 0:
-            logger.info(f"⏳ Colección '{COLLECTION_NAME}' vacía en Qdrant. Iniciando ingesta...")
-            ingest_main()
-        else:
-            logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada con {collection_info.points_count} puntos, saltando ingesta.")
-    except Exception:
-        logger.info(f"⏳ Colección '{COLLECTION_NAME}' no existe en Qdrant. Iniciando ingesta...")
+    async def verify_qdrant():
         try:
-            ingest_main()
-        except Exception as e:
-            logger.error(f"❌ Error durante la ingesta en Qdrant: {e}")
+            collection_info = await qdrant_client.get_collection(COLLECTION_NAME)
+            if collection_info.points_count == 0:
+                logger.info(f"⏳ Colección '{COLLECTION_NAME}' vacía en Qdrant. Iniciando ingesta...")
+                ingest_main()
+            else:
+                logger.info(f"✅ Colección '{COLLECTION_NAME}' encontrada con {collection_info.points_count} puntos, saltando ingesta.")
+        except Exception:
+            logger.info(f"⏳ Colección '{COLLECTION_NAME}' no existe en Qdrant. Iniciando ingesta...")
+            try:
+                ingest_main()
+            except Exception as e:
+                logger.error(f"❌ Error durante la ingesta en Qdrant: {e}")
 
     # Verificación Neo4j
-    try:
-        records, _, _ = neo4j_driver.execute_query(
-            "MATCH (t:Table) RETURN count(t) AS count",
-            database_="neo4j"
-        )
-        count = records[0]["count"]
-        if count == 0:
-            logger.info("⏳ Grafo Neo4j vacío. Iniciando ingesta en Neo4j por primera vez...")
-            ingest_neo4j_main()
-        else:
-            logger.info(f"✅ Se encontraron {count} tablas en Neo4j, saltando ingesta.")
-    except Exception as e:
-        logger.warning(f"⚠️ No se pudo verificar Neo4j ({e}). Intentando ingesta por si acaso...")
+    async def verify_neo4j():
         try:
-            ingest_neo4j_main()
-        except Exception as e2:
-            logger.error(f"❌ Error crítico al intentar ingesta en Neo4j: {e2}")
+            async with neo4j_driver.session(database="neo4j") as session:
+                result = await session.run("MATCH (t:Table) RETURN count(t) AS count")
+                record = await result.single()
+                count = record["count"]
+                if count == 0:
+                    logger.info("⏳ Grafo Neo4j vacío. Iniciando ingesta en Neo4j por primera vez...")
+                    ingest_neo4j_main()
+                else:
+                    logger.info(f"✅ Se encontraron {count} tablas en Neo4j, saltando ingesta.")
+        except Exception as e:
+            logger.warning(f"⚠️ No se pudo verificar Neo4j ({e}). Intentando ingesta por si acaso...")
+            try:
+                ingest_neo4j_main()
+            except Exception as e2:
+                logger.error(f"❌ Error crítico al intentar ingesta en Neo4j: {e2}")
 
-    port = int(os.getenv("PORT", 8080))
-    logger.info(f"🚀 MCP server started on port {port}")
-    asyncio.run(
-        mcp.run_async(
+    async def main_async():
+        await verify_qdrant()
+        await verify_neo4j()
+        
+        port = int(os.getenv("PORT", 8080))
+        logger.info(f"🚀 MCP server started on port {port}")
+        await mcp.run_async(
             transport="http",
             host="0.0.0.0",
             port=port,
         )
-    )
+
+    asyncio.run(main_async())

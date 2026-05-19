@@ -4,7 +4,7 @@ import json
 # from qdrant_client.http import models
 
 # --- CARGAR TU JSON ---
-with open("./metadata_demo.json", "r", encoding="utf-8") as f:
+with open("./metadata_demo_5.json", "r", encoding="utf-8") as f:
     metadata_raw = json.load(f)
 
 # Lista para guardar los puntos listos para Qdrant
@@ -107,7 +107,7 @@ for nombre_tabla, data_tabla in metadata_raw.items():
 print(f"✅ Procesado completado. Se generaron {len(puntos_qdrant)} chunks.")
 
 # Guardar en JSON para su posterior vectorización
-OUTPUT_FILE = "./chunks_demo4.json"
+OUTPUT_FILE = "./chunks_demo8.json"
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(puntos_qdrant, f, indent=4, ensure_ascii=False)
 

@@ -106,7 +106,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 30
-      start_period: 120s
+      start_period: 1200s
     volumes:
       - ./mcp_server:/app
     environment:
@@ -143,6 +143,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 1200s
 
   qdrant_openai:
     image: qdrant/qdrant:latest
@@ -161,7 +162,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 15
-      start_period: 15s
+      start_period: 1200s
 
   frontend_openai:
     build:
@@ -193,7 +194,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-      start_period: 30s
+      start_period: 1200s
 
 volumes:
   postgres_data:

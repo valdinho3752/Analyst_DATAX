@@ -10,7 +10,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 # ================= CONFIGURACIÓN =================
 # Referencia al archivo de chunks en la otra carpeta
-INPUT_FILE = "metadata/chunks_demo4.json"
+INPUT_FILE = "metadata/chunks_demo8.json"
 COLLECTION_NAME = "rag_metadata_demo_openia"
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 

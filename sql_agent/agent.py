@@ -38,16 +38,19 @@ class SqlAgent:
         2. **Catálogo de Validación del Grafo**: Un JSON que te lista qué miembros y columnas existen en qué niveles (Nv1-Nv4).
         
         ## REGLAS DE ORO (DELEGACIÓN POR INTENCIÓN)
-        1. **Decisión de Profundidad**:
-           - Analiza tu **Pregunta Original**. ¿El usuario mencionó conceptos específicos granulares (ej: 'bancos', 'intereses de préstamos')?
-           - Si la respuesta es SÍ, y el **Grafo** te ofrece una ruta hacia Nv3 o Nv4 que coincida léxicamente con esos términos, **ÚSALA**.
-           - Si la pregunta es general o el Grafo solo valida niveles macro, mantente en **Nv1 / Nv2**.
+        1. **Decisión de Profundidad y Desglose**:
+           - Analiza tu **Pregunta Original**. ¿El usuario pidió un concepto específico que resulta ser un subnivel (ej: 'bancos', 'caja') o pidió explícitamente ver todo desglosado (ej: 'detalle por banco')?
+           - Si la respuesta es SÍ, revisa si el reporte del Grafo incluye "Subniveles disponibles" y te muestra ejemplos internos.
+           - **OBLIGATORIO**: 
+             - Si el usuario pide el dato de un **subnivel específico** (ej. "en bancos") y ves que existe en los ejemplos internos, **DEBES añadir esa dimensión al `WHERE`** para filtrarlo específicamente (ej. `AND "Cuenta Financiera Nv3" = '10102 BANCOS Y ENTIDADES FINANCIERAS'`), junto con la ruta obligatoria del padre.
+             - Si el usuario pide un **desglose general** ("detalle por cuenta"), debes añadir la dimensión al `SELECT` y al `GROUP BY`.
+           - Si la pregunta es general macro, omite los subniveles y mantén la consulta agregada en los niveles validados en la ruta obligatoria.
         2. **Dinámica Temporal y Cronológica**:
            - **Filtros de Año**: Si el usuario pide los "últimos años" (3 por defecto), usa: `WHERE "Año" > (SELECT MAX("Año") FROM tabla) - 3`. Si no especifica periodo, asume el cierre actual: `WHERE "Año" = (SELECT MAX("Año") FROM tabla)`.
            - **Tratamiento por Tipo de Hecho**: Hechos tipo `saldo` filtran por `Mes = 'Diciembre'`. Hechos tipo `flujo` usan `SUM` sobre los meses.
         3. **Agrupamiento y Agregación Obligatoria**:
            - Agrupa según la granularidad solicitada: "gestiones" -> `GROUP BY "Año"`; "mensual" -> `GROUP BY "Año", "Mes"`.
-           - **DEBES** usar siempre una función de agregación (típicamente `SUM`) para las columnas numéricas de montos o saldos cuando uses `GROUP BY`. No devuelvas valores crudos si la consulta está agrupada.
+           - **DEBES** usar siempre una función de agregación para las métricas numéricas. AUNQUE la metadata del catálogo prohíba usar `SUM` en el tiempo para los hechos tipo `saldo`, **SÍ DEBES usar `SUM`** para totalizar el monto a través de entidades o dimensiones (ej. suma de bancos) siempre y cuando ya hayas filtrado un único punto en el tiempo (ej. `Mes = 'Diciembre'`). Solo usa `MAX` o `AVG` si el usuario lo pide explícitamente ("promedio", "máximo").
         4. **Uso de Herramientas y Linaje**:
            - Tu fuente primaria de miembros es el JSON del Grafo.
            - **Filtros Minimalistas**: Aunque el Grafo te sugiera rutas jerárquicas o dimensiones de apoyo, sé crítico y prioriza la simplicidad. Si el filtro de la dimensión principal (sujeto u objeto central de la consulta) ya identifica de forma única los registros necesarios, evita agregar filtros de dimensiones técnicas o de clasificación redundantes que puedan añadir ruido o causar fallos por sensibilidad de datos.

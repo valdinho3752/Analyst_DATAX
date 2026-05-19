@@ -11,7 +11,7 @@ NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "testpassword")
 
-INPUT_FILE = "metadata/chunks_demo4.json"
+INPUT_FILE = "metadata/chunks_demo8.json"
 
 class GraphIngestor:
     def __init__(self, uri, user, password):
@@ -113,7 +113,7 @@ class GraphIngestor:
         """Conecta dimensiones Nv(X) a Nv(X-1) dentro de la misma tabla."""
         query_get = """
         MATCH (d:Dimension)-[:BELONGS_TO]->(t:Table)
-        WHERE d.name =~ '(?i).*Nv[0-9]+.*'
+        WHERE d.name CONTAINS "Nv" OR d.name CONTAINS "nv"
         RETURN t.name AS table, d.name AS dim_name
         """
         import re
@@ -155,12 +155,42 @@ class GraphIngestor:
         MATCH (childMember:Member)-[:BELONGS_TO]->(childDim)
         MATCH (parentMember:Member)-[:BELONGS_TO]->(parentDim)
         WHERE childMember.table = parentMember.table
-          AND childMember.name <> parentMember.name
-        WITH childMember, parentMember, split(parentMember.name, ' ')[0] AS parentCode
-        WHERE childMember.name STARTS WITH parentCode
+        AND childMember.name <> parentMember.name
+
+        // 1. Extraemos el prefijo inicial (código)
+        WITH childMember, parentMember, 
+             split(parentMember.name, ' ')[0] AS rawParentCode,
+             split(childMember.name, ' ')[0] AS rawChildCode
+
+        // 2. Limpieza Nivel 1: Reemplazamos la extensión decimal de relleno '.00' si existe
+        WITH childMember, parentMember,
+             (CASE WHEN rawParentCode ENDS WITH ".00" THEN substring(rawParentCode, 0, size(rawParentCode)-3) ELSE rawParentCode END) AS p1,
+             (CASE WHEN rawChildCode ENDS WITH ".00" THEN substring(rawChildCode, 0, size(rawChildCode)-3) ELSE rawChildCode END) AS c1
+
+        // 3. Limpieza Nivel 2: Quitamos el primer cero a la derecha (si lo tiene como relleno)
+        WITH childMember, parentMember,
+             (CASE WHEN p1 ENDS WITH "0" THEN substring(p1, 0, size(p1)-1) ELSE p1 END) AS p2,
+             (CASE WHEN c1 ENDS WITH "0" THEN substring(c1, 0, size(c1)-1) ELSE c1 END) AS c2
+
+        // 4. Limpieza Nivel 3: Quitamos el segundo cero a la derecha (si lo tiene como relleno)
+        WITH childMember, parentMember,
+             (CASE WHEN p2 ENDS WITH "0" THEN substring(p2, 0, size(p2)-1) ELSE p2 END) AS parentCode,
+             (CASE WHEN c2 ENDS WITH "0" THEN substring(c2, 0, size(c2)-1) ELSE c2 END) AS childCode
+
+        // 5. FILTRO CRÍTICO: Validamos que ambos sean numéricos, que el hijo empiece con el padre y sea estrictamente más largo (más dígitos activos)
+        WHERE parentCode =~ '^[0-9.]+$' 
+        AND childCode =~ '^[0-9.]+$'
+        AND childCode STARTS WITH parentCode
+        AND size(childCode) > size(parentCode)
+
+        // 6. Buscamos el prefijo más largo (el padre más específico)
         WITH childMember, parentMember, size(parentCode) as prefLen
         ORDER BY prefLen DESC
+
+        // 7. Nos quedamos con el mejor candidato por cada miembro hijo
         WITH childMember, collect(parentMember)[0] as bestParent
+
+        // 8. Creamos la estructura jerárquica
         MERGE (childMember)-[:CHILD_OF]->(bestParent)
         """
         with self.driver.session() as session:
