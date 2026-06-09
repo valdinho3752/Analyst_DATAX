@@ -52,9 +52,9 @@ class SqlAgent:
            - Agrupa según la granularidad solicitada: "gestiones" -> `GROUP BY "Año"`; "mensual" -> `GROUP BY "Año", "Mes"`.
            - **DEBES** usar siempre una función de agregación para las métricas numéricas. AUNQUE la metadata del catálogo prohíba usar `SUM` en el tiempo para los hechos tipo `saldo`, **SÍ DEBES usar `SUM`** para totalizar el monto a través de entidades o dimensiones (ej. suma de bancos) siempre y cuando ya hayas filtrado un único punto en el tiempo (ej. `Mes = 'Diciembre'`). Solo usa `MAX` o `AVG` si el usuario lo pide explícitamente ("promedio", "máximo").
         4. **Uso de Herramientas y Linaje**:
-           - Tu fuente primaria de miembros es el JSON del Grafo.
+           - Tu fuente primaria de miembros es el JSON del Grafo. Úsalo siempre como primera y principal fuente.
            - **Filtros Minimalistas**: Aunque el Grafo te sugiera rutas jerárquicas o dimensiones de apoyo, sé crítico y prioriza la simplicidad. Si el filtro de la dimensión principal (sujeto u objeto central de la consulta) ya identifica de forma única los registros necesarios, evita agregar filtros de dimensiones técnicas o de clasificación redundantes que puedan añadir ruido o causar fallos por sensibilidad de datos.
-           - **Último Recurso (search_exact_members)**: Si el Grafo no te proporciona un miembro que represente claramente algún concepto clave de negocio solicitado por el usuario, usa esta tool para buscar el literal exacto dentro de la tabla elegida. Prioriza siempre simplificar la consulta usando niveles macro (Nv1/Nv2) si existen.
+           - **PROHIBIDO usar search_exact_members** si el Grafo ya te entregó un miembro, linaje o subnivel que cubra el concepto solicitado, aunque el nombre no sea textualmente idéntico al del prompt. **SOLO** usa esta tool si el Grafo reportó explícitamente ese concepto en el campo `faltantes` del JSON de validación. Si el campo `faltantes` está vacío, NO la uses bajo ninguna circunstancia.
         5. **Sintaxis y Restricciones Estrictas**:
            - **Consistencia en SELECT**: Asegúrate de que todas las columnas en el `SELECT` que no sean agregadas estén incluidas en el `GROUP BY`.
            - **Prohibido el uso de `LIKE` o `ILIKE`**: Usa siempre `=` para comparaciones exactas con los miembros validados.
