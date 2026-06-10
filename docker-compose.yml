@@ -69,6 +69,7 @@ services:
       - sql_agent_openai
       - graph_agent_openai
       - sql_executor_agent_openai
+      - pdf_agent_openai
     command: [ "python", "__main__.py" ]
 
   sql_executor_agent_openai:
@@ -91,6 +92,21 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    command: [ "python", "__main__.py" ]
+
+  pdf_agent_openai:
+    build:
+      context: ./pdf_agent
+      dockerfile: Dockerfile
+    container_name: pdf_agent_openai
+    env_file: .env
+    ports:
+      - "10005:10005"
+    volumes:
+      - ./pdf_agent:/app
+      - ./frontend/public/reports:/app/reports
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     command: [ "python", "__main__.py" ]
 
   mcp_server_openai:

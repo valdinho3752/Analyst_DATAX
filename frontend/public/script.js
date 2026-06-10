@@ -80,6 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 agentText = `Error Interno: ${data.error}`;
             }
 
+            if (agentText) {
+                agentText = agentText.replace(/\]\(\/reports\//g, '](http://localhost:8000/reports/');
+            }
+
             appendMessage(agentText, 'system');
 
         } catch (error) {
@@ -107,6 +111,35 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
+        // Asegurar que los enlaces a PDF se abran en otra pestaña y fuercen la descarga
+        if (sender === 'system') {
+            const pdfLinks = msgDiv.querySelectorAll('a[href$=".pdf"]');
+            pdfLinks.forEach(link => {
+                let href = link.getAttribute('href');
+                // Si el href tiene el esquema sandbox:, removerlo
+                if (href && href.startsWith('sandbox:')) {
+                    href = href.replace('sandbox:', '');
+                }
+                
+                // Determinar el origen correcto (si es sandbox o null, usar http://localhost:8000)
+                let baseOrigin = window.location.origin;
+                if (!baseOrigin || baseOrigin.startsWith('sandbox') || baseOrigin === 'null' || !baseOrigin.startsWith('http')) {
+                    baseOrigin = 'http://localhost:8000';
+                }
+
+                // Si el href es una ruta relativa absoluta, forzar la URL completa
+                if (href && href.startsWith('/')) {
+                    href = baseOrigin + href;
+                } else if (href && !href.startsWith('http')) {
+                    href = baseOrigin + '/' + href;
+                }
+                
+                link.setAttribute('href', href);
+                link.setAttribute('target', '_blank');
+                link.setAttribute('download', '');
+            });
+        }
+
         chatHistory.appendChild(msgDiv);
         lucide.createIcons();
         chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -120,4 +153,39 @@ document.addEventListener('DOMContentLoaded', () => {
              .replace(/"/g, "&quot;")
              .replace(/'/g, "&#039;");
     }
+
+    // Interceptar clicks en enlaces a PDF para evitar bloqueos del sandbox del IDE
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link) {
+            const hrefAttr = link.getAttribute('href') || '';
+            const hrefProp = link.href || '';
+            
+            if (hrefAttr.endsWith('.pdf') || hrefProp.endsWith('.pdf')) {
+                e.preventDefault();
+                
+                let cleanedPath = hrefAttr;
+                if (cleanedPath.startsWith('sandbox:')) {
+                    cleanedPath = cleanedPath.replace('sandbox:', '');
+                }
+                
+                // Determinar el origen correcto (usar http://localhost:8000 de fallback)
+                let baseOrigin = window.location.origin;
+                if (!baseOrigin || baseOrigin.startsWith('sandbox') || baseOrigin === 'null' || !baseOrigin.startsWith('http')) {
+                    baseOrigin = 'http://localhost:8000';
+                }
+                
+                // Asegurar URL absoluta
+                let targetUrl = cleanedPath;
+                if (cleanedPath.startsWith('/')) {
+                    targetUrl = baseOrigin + cleanedPath;
+                } else if (!cleanedPath.startsWith('http')) {
+                    targetUrl = baseOrigin + '/' + cleanedPath;
+                }
+                
+                console.log("Redirigiendo click de PDF a:", targetUrl);
+                window.open(targetUrl, '_blank');
+            }
+        }
+    });
 });

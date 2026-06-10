@@ -1,0 +1,7 @@
+a2a-sdk[http-server]==0.3.26
+uvicorn
+python-dotenv
+openai-agents
+jinja2
+matplotlib
+pandas
